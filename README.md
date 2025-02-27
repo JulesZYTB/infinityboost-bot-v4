@@ -11,12 +11,17 @@ InfinityBoost Bot V4 is a powerful tool designed to enhance your trading experie
 To install the bot, follow these steps:
 1. Clone the repository.
 2. Run `npm install` to install the necessary dependencies.
-3. Configure the bot by editing the `installConfig.js` file to set up your environment.
+3. Run `node installConfig.js` to set up your environment.
 
 ### Configuration
 The `config.json` file contains all the necessary configuration settings for the bot. Modify this file to customize the bot's behavior according to your needs.
 
 ### Usage
+To run the bot, use one of the following commands:
+- `npm start`
+- `node index`
+
+You can use various commands to interact with the bot, including:
 To run the bot, execute the following command:
 
 You can use various commands to interact with the bot, including:
@@ -46,12 +51,17 @@ InfinityBoost Bot V4 est un outil puissant conçu pour améliorer votre expérie
 Pour installer le bot, suivez ces étapes :
 1. Clonez le dépôt.
 2. Exécutez `npm install` pour installer les dépendances nécessaires.
-3. Configurez le bot en modifiant le fichier `installConfig.js` pour configurer votre environnement.
+3. Exécutez `node installConfig.js` pour configurer votre environnement.
 
 ### Configuration
 Le fichier `config.json` contient tous les paramètres de configuration nécessaires pour le bot. Modifiez ce fichier pour personnaliser le comportement du bot selon vos besoins.
 
 ### Utilisation
+Pour exécuter le bot, utilisez l'une des commandes suivantes :
+- `npm start`
+- `node index`
+
+Vous pouvez utiliser différentes commandes pour interagir avec le bot, notamment :
 Pour exécuter le bot, utilisez la commande suivante :
 
 Vous pouvez utiliser différentes commandes pour interagir avec le bot, notamment :
