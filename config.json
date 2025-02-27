@@ -14,7 +14,6 @@
     "banner": ""
   },
   "autobuy": {
-    "enabled": false,
     "bio": ".gg/infinityboost - https://bloumechat.com",
     "apikey_sellauth": "",
     "shop_id_sellauth": "",
