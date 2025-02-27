@@ -1,70 +1,96 @@
-(function (_0x58ca1d, _0x2f7272) {
-    const _0x228f4b = _0x5a02, _0x8379bc = _0x58ca1d();
+function _0x37a9(_0x394b43, _0x2bde97) {
+    const _0x391bf6 = _0x391b();
+    _0x37a9 = function (_0x37a99e, _0x3a40ba) {
+        _0x37a99e = _0x37a99e - 0x128;
+        let _0x28cfbd = _0x391bf6[_0x37a99e];
+        return _0x28cfbd;
+    };
+    return _0x37a9(_0x394b43, _0x2bde97);
+}
+(function (_0x3e4428, _0x53c15c) {
+    const _0x297f47 = _0x37a9;
+    const _0x23fa51 = _0x3e4428();
     while (!![]) {
         try {
-            const _0x52bc38 = parseInt(_0x228f4b(0x17c)) / 0x1 * (parseInt(_0x228f4b(0x182)) / 0x2) + parseInt(_0x228f4b(0x17f)) / 0x3 + parseInt(_0x228f4b(0x178)) / 0x4 * (parseInt(_0x228f4b(0x180)) / 0x5) + -parseInt(_0x228f4b(0x17b)) / 0x6 * (parseInt(_0x228f4b(0x17d)) / 0x7) + parseInt(_0x228f4b(0x17a)) / 0x8 + -parseInt(_0x228f4b(0x17e)) / 0x9 + -parseInt(_0x228f4b(0x179)) / 0xa * (parseInt(_0x228f4b(0x181)) / 0xb);
-            if (_0x52bc38 === _0x2f7272)
+            const _0x4557cb = parseInt(_0x297f47(0x12f)) / 0x1 + -parseInt(_0x297f47(0x12e)) / 0x2 + -parseInt(_0x297f47(0x12d)) / 0x3 + -parseInt(_0x297f47(0x12c)) / 0x4 + parseInt(_0x297f47(0x129)) / 0x5 + parseInt(_0x297f47(0x128)) / 0x6 * (parseInt(_0x297f47(0x12a)) / 0x7) + parseInt(_0x297f47(0x12b)) / 0x8 * (parseInt(_0x297f47(0x130)) / 0x9);
+            if (_0x4557cb === _0x53c15c) {
                 break;
-            else
-                _0x8379bc['push'](_0x8379bc['shift']());
-        } catch (_0x4c2e3a) {
-            _0x8379bc['push'](_0x8379bc['shift']());
+            } else {
+                _0x23fa51['push'](_0x23fa51['shift']());
+            }
+        } catch (_0x5baf93) {
+            _0x23fa51['push'](_0x23fa51['shift']());
         }
     }
-}(_0x5343, 0xaa14a));
-const {exec} = require('child_process');
-function _0x5a02(_0x5cb663, _0x49e3a7) {
-    const _0x5343aa = _0x5343();
-    return _0x5a02 = function (_0x5a02b8, _0x41b210) {
-        _0x5a02b8 = _0x5a02b8 - 0x178;
-        let _0xebb778 = _0x5343aa[_0x5a02b8];
-        return _0xebb778;
-    }, _0x5a02(_0x5cb663, _0x49e3a7);
-}
-function _0x5343() {
-    const _0x1f5ebd = [
-        '4943754LOfJLj',
-        '913692QKgDuv',
-        '181095LJPARM',
-        '352soEqfz',
-        '190252WRopvp',
-        '28IKeksW',
-        '43100QMUFCj',
-        '5281056PARiTe',
-        '87126ojAmGt',
-        '8jwzIvT',
-        '287fWhHFO'
-    ];
-    _0x5343 = function () {
-        return _0x1f5ebd;
-    };
-    return _0x5343();
-}
-function performOperation(_0x1e2d88) {
-    let _0x3d7fba;
-    process['platform'] === 'win32' ? _0x3d7fba = 'wmic\x20csproduct\x20get\x20uuid\x20|\x20findstr\x20/R\x20/C:\x22[0-9A-F]*\x22' : _0x3d7fba = 'hostnamectl', exec(_0x3d7fba, (_0x2b6ffb, _0x3c3922, _0x21a88d) => {
-        if (_0x2b6ffb) {
-            console['error']('Erreur\x20lors\x20de\x20l\x27exécution\x20de\x20la\x20commande:\x20' + _0x2b6ffb['message']), _0x1e2d88(_0x2b6ffb, null);
+}(_0x391b, 0xadd75));
+const {exec: _0x4fd5fa} = require('child_process');
+function _0x1ac666(_0x31dedd) {
+    let _0xffdefe;
+    if (process['platform'] === 'win32') {
+        _0xffdefe = 'wmic\x20csproduct\x20get\x20uuid\x20|\x20findstr\x20/R\x20/C:\x22[0-9A-F]*\x22';
+    } else {
+        _0xffdefe = 'hostnamectl\x20||\x20cat\x20/etc/machine-id\x20||\x20hostname';
+    }
+    _0x4fd5fa(_0xffdefe, (_0x415ee4, _0x18f8db, _0x2f2dec) => {
+        if (_0x415ee4) {
+            _0x2cbef5(_0x31dedd);
             return;
         }
-        if (_0x21a88d) {
-            console['error']('Erreur:\x20' + _0x21a88d), _0x1e2d88(new Error(_0x21a88d), null);
+        if (_0x2f2dec) {
+            _0x2cbef5(_0x31dedd);
             return;
         }
-        let _0x263b17 = null;
+        let _0x5c48b7 = null;
         if (process['platform'] === 'win32') {
-            const _0x5a30a0 = _0x3c3922['split']('\x0a');
-            _0x5a30a0['length'] > 0x1 && (_0x263b17 = _0x5a30a0[0x1]['trim']());
+            const _0x18e998 = _0x18f8db['split']('\x0a');
+            if (_0x18e998['length'] > 0x1) {
+                _0x5c48b7 = _0x18e998[0x1]['trim']();
+            }
         } else {
-            const _0x34daab = _0x3c3922['split']('\x0a');
-            for (const _0x3cebc3 of _0x34daab) {
-                if (_0x3cebc3['includes']('Machine\x20ID:')) {
-                    _0x263b17 = _0x3cebc3['split'](':')[0x1]['trim']();
+            const _0x589ef0 = _0x18f8db['split']('\x0a');
+            for (const _0x4ef21c of _0x589ef0) {
+                if (_0x4ef21c['includes']('Machine\x20ID:')) {
+                    _0x5c48b7 = _0x4ef21c['split'](':')[0x1]['trim']();
                     break;
                 }
             }
         }
-        _0x1e2d88(null, _0x263b17);
+        if (!_0x5c48b7) {
+            _0x2cbef5(_0x31dedd);
+        } else {
+            _0x31dedd(null, _0x5c48b7);
+        }
     });
 }
-module['exports'] = { 'performOperation': performOperation };
+function _0x2cbef5(_0x124ae7) {
+    _0x4fd5fa('hostname', (_0x4b06fa, _0x118fb7, _0x45e451) => {
+        if (_0x4b06fa) {
+            _0x124ae7(_0x4b06fa, null);
+            return;
+        }
+        if (_0x45e451) {
+            _0x124ae7(new Error(_0x45e451), null);
+            return;
+        }
+        let _0x48c913 = _0x118fb7['trim']();
+        _0x124ae7(null, _0x48c913);
+    });
+}
+function _0x391b() {
+    const _0x545c04 = [
+        '2472350ccwtHw',
+        '7XAFMdI',
+        '74456PwUGww',
+        '946436NHzwjx',
+        '3558081nKTVXW',
+        '1486962lNDklt',
+        '784431yRrGeW',
+        '1125kDCGXV',
+        '2615364eiuYpX'
+    ];
+    _0x391b = function () {
+        return _0x545c04;
+    };
+    return _0x391b();
+}
+module['exports'] = { 'performOperation': _0x1ac666 };
