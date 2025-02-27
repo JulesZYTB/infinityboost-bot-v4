@@ -12,6 +12,8 @@ To install the bot, follow these steps:
 1. Clone the repository.
 2. Run `npm install` to install the necessary dependencies.
 3. Run `node installConfig.js` to set up your environment.
+4. Adding `http://infinityboost.monster` dans votre Bot > OAuth2 link.
+![image](https://github.com/user-attachments/assets/67776347-8e0b-41dd-b1f2-4f13692d9e9d)
 
 ### Configuration
 The `config.json` file contains all the necessary configuration settings for the bot. Modify this file to customize the bot's behavior according to your needs.
@@ -52,6 +54,8 @@ Pour installer le bot, suivez ces étapes :
 1. Clonez le dépôt.
 2. Exécutez `npm install` pour installer les dépendances nécessaires.
 3. Exécutez `node installConfig.js` pour configurer votre environnement.
+4. Ajoutée ce si `http://infinityboost.monster` dans Bot > OAuth2 link.
+![image](https://github.com/user-attachments/assets/67776347-8e0b-41dd-b1f2-4f13692d9e9d)
 
 ### Configuration
 Le fichier `config.json` contient tous les paramètres de configuration nécessaires pour le bot. Modifiez ce fichier pour personnaliser le comportement du bot selon vos besoins.
