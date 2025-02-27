@@ -1,0 +1,34 @@
+{
+  "maintenance": "false",
+  "apikey": "",
+  "bot": {
+    "token": "",
+    "guildid": "",
+    "clientid": "",
+    "clientsecret": "",
+    "discord_webhook_url_command_log": ""
+  },
+  "service": {
+    "name_shop": "ShopName",
+    "langue_shop": "fr",
+    "banner": ""
+  },
+  "autobuy": {
+    "enabled": false,
+    "bio": ".gg/infinityboost - https://bloumechat.com",
+    "apikey_sellauth": "",
+    "shop_id_sellauth": "",
+    "discord_webhook_url_command_log": "",
+    "discord_webhook_url_console": "",
+    "bio_variable_Custom_Field": "",
+    "guildid_variable_Custom_Field": "",
+    "orders_command_for_page": 100,
+    "host": "",
+    "port": 10000
+  },
+  "admin": {
+    "id_1": "",
+    "id_2": "",
+    "id_3": ""
+  }
+}

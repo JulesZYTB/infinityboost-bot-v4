@@ -1,0 +1,29 @@
+{
+    "name": "infinityboost-bot-v4",
+    "version": "4.0.0",
+    "description": "",
+    "main": "./index.js",
+    "bin": "./index.js",
+    "scripts": {
+        "start": "node index.js",
+        "dev": "node index.js"
+    },
+    "author": "MrX > old JulesZ",
+    "license": "MIT",
+    "dependencies": {
+        "@discordjs/builders": "^0.6.0",
+        "@discordjs/rest": "^0.1.0-canary.0",
+        "@discordjs/voice": "^0.16.0",
+        "axios": "^1.6.7",
+        "discord.js": "^13.1.0",
+        "diskusage": "^1.2.0",
+        "dotenv": "^16.4.5",
+        "figlet": "^1.7.0",
+        "fs": "^0.0.1-security",
+        "gradient-string": "^2.0.2",
+        "https-proxy-agent": "^7.0.5",
+        "inquirer": "^8.2.0",
+        "line-by-line": "^0.1.6",
+        "pretty-ms": "^7.0.1"
+    }
+}
