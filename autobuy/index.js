@@ -1,622 +1,713 @@
-(function (_0x51a148, _0x475136) {
-    const _0x228b1a = _0x3bae;
-    const _0x29f828 = _0x51a148();
-    while (!![]) {
-        try {
-            const _0xda0c64 = -parseInt(_0x228b1a(0x1c2)) / 0x1 * (parseInt(_0x228b1a(0x1c1)) / 0x2) + parseInt(_0x228b1a(0x1c0)) / 0x3 * (parseInt(_0x228b1a(0x1c5)) / 0x4) + parseInt(_0x228b1a(0x1c3)) / 0x5 * (parseInt(_0x228b1a(0x1bf)) / 0x6) + parseInt(_0x228b1a(0x1c4)) / 0x7 + parseInt(_0x228b1a(0x1bd)) / 0x8 + parseInt(_0x228b1a(0x1be)) / 0x9 + -parseInt(_0x228b1a(0x1c6)) / 0xa;
-            if (_0xda0c64 === _0x475136) {
-                break;
-            } else {
-                _0x29f828['push'](_0x29f828['shift']());
-            }
-        } catch (_0x5c958a) {
-            _0x29f828['push'](_0x29f828['shift']());
-        }
-    }
-}(_0x387f, 0xd1bb0));
-const _0x1df006 = require('http');
-const _0x130cbc = require('url');
-const _0x405f39 = require('axios');
-const _0x3019c7 = require('fs');
-const _0x3c39ca = require('path');
-const _0x488f06 = require('os');
-const _0x18b869 = require('gradient-string');
-const _0x5bc76d = './commandes.json';
-const _0x35b4d7 = require('../config.json');
-function _0x3bae(_0x782f90, _0x442b65) {
-    const _0x387f1a = _0x387f();
-    _0x3bae = function (_0x3bae22, _0x632019) {
-        _0x3bae22 = _0x3bae22 - 0x1bd;
-        let _0x1155df = _0x387f1a[_0x3bae22];
-        return _0x1155df;
-    };
-    return _0x3bae(_0x782f90, _0x442b65);
+const http = require('http');
+const url = require('url');
+const axios = require('axios');
+const fs = require('fs');
+const path = require("path");
+const os = require('os');
+const gradient = require('gradient-string');
+const paths = './commandes.json';
+const config = require("../config.json");
+const { performOperation } = require('../required/performOp');
+const { WebhookClient } = require('discord.js');
+const LineByLineReader = require('line-by-line');
+
+let name = config.service.name_shop;
+let bannier = config.service.banner;
+let apikey = config.apikey;
+let portserveur = config.autobuy.port;
+let hostns = config.autobuy.host; 
+let autobuybio = config.autobuy.bio;
+let shopId = config.autobuy.shop_id_sellauth;
+let apikey_sellauth = config.autobuy.apikey_sellauth;
+let discordWebhookUrl = config.autobuy.discord_webhook_url_command_log;
+let discordWebhookLOG = config.autobuy.discord_webhook_url_console;
+let orders_command_for_page = config.autobuy.orders_command_for_page;
+let guildid_variable_Custom_Field = config.autobuy.guildid_variable_Custom_Field || "Serveur ID";
+let bio_variable_Custom_Field = config.autobuy.bio_variable_Custom_Field || "Bio";
+const langData = JSON.parse(fs.readFileSync('./api-translate/langs.json', 'utf-8'));
+const webhookClient = new WebhookClient({ url: discordWebhookLOG });
+const webhookClientCommand = new WebhookClient({ url: discordWebhookUrl });
+const lang = config.service.langue_shop;
+const translations = langData[lang];
+//Code by MrX .
+let clientbot = config.bot.clientid;
+let tokenbot = config.bot.token;
+let clientsecret = config.bot.clientsecret;
+let machineID;
+
+async function initializeMachineID() {
+  return new Promise((resolve, reject) => {
+      performOperation((error, id) => {
+          if (error) {
+              console.log('Erreur lors de l\'exécution du code, code erreur : 500, Veuillez contacter le support.');
+              reject(error); // Rejeter la promesse en cas d'erreur
+          } else {
+              machineID = id; // Assigner le machineID
+              resolve(machineID); // Résoudre la promesse avec le machineID
+          }
+      });
+  });
 }
-const {performOperation: _0x4c2b55} = require('../required/performOp');
-const {WebhookClient: _0x5e9de7} = require('discord.js');
-const _0x274031 = require('line-by-line');
-let _0x378f48 = _0x35b4d7['service']['name_shop'];
-let _0x5efbd2 = _0x35b4d7['service']['banner'];
-let _0x3d4694 = _0x35b4d7['apikey'];
-let _0x27ffab = _0x35b4d7['autobuy']['port'];
-let _0x1d27bf = _0x35b4d7['autobuy']['host'];
-let _0x284b38 = _0x35b4d7['autobuy']['bio'];
-let _0x4bca01 = _0x35b4d7['autobuy']['shop_id_sellauth'];
-let _0x5ccb72 = _0x35b4d7['autobuy']['apikey_sellauth'];
-let _0x4db450 = _0x35b4d7['autobuy']['discord_webhook_url_command_log'];
-let _0x1ced72 = _0x35b4d7['autobuy']['discord_webhook_url_console'];
-let _0x265f61 = _0x35b4d7['autobuy']['orders_command_for_page'];
-let _0x1f0961 = _0x35b4d7['autobuy']['guildid_variable_Custom_Field'] || 'Serveur\x20ID';
-let _0x579717 = _0x35b4d7['autobuy']['bio_variable_Custom_Field'] || 'Bio';
-const _0x269183 = JSON['parse'](_0x3019c7['readFileSync']('./api-translate/langs.json', 'utf-8'));
-const _0x33057c = new _0x5e9de7({ 'url': _0x1ced72 });
-const _0x142702 = new _0x5e9de7({ 'url': _0x4db450 });
-const _0x52a8d7 = _0x35b4d7['service']['langue_shop'];
-const _0x2d30cd = _0x269183[_0x52a8d7];
-let _0xbe1552 = _0x35b4d7['bot']['clientid'];
-function _0x387f() {
-    const _0xd1da48 = [
-        '1703712BbvfCN',
-        '1FWHYuM',
-        '2173135ROUgfq',
-        '274071NAQJBR',
-        '5030264HQcmBs',
-        '35802180kFsjNa',
-        '11532240CKVobj',
-        '11241000eChWJZ',
-        '18aioXax',
-        '3SpGTmc'
-    ];
-    _0x387f = function () {
-        return _0xd1da48;
-    };
-    return _0x387f();
-}
-let _0x744567 = _0x35b4d7['bot']['token'];
-let _0x1c18a4 = _0x35b4d7['bot']['clientsecret'];
-let _0x19d548;
-async function _0x3b8a46() {
-    return new Promise((_0x4e92d9, _0xe49a48) => {
-        _0x4c2b55((_0x151bb0, _0x38d63a) => {
-            if (_0x151bb0) {
-                console['log']('Erreur\x20lors\x20de\x20l\x27exécution\x20du\x20code,\x20code\x20erreur\x20:\x20500,\x20Veuillez\x20contacter\x20le\x20support.');
-                _0xe49a48(_0x151bb0);
-            } else {
-                _0x19d548 = _0x38d63a;
-                _0x4e92d9(_0x19d548);
-            }
-        });
-    });
-}
-async function _0x50b135(_0x3361ab) {
-    const _0x1d9923 = _0x3361ab['split'](':');
-    if (_0x1d9923['length'] === 0x3) {
-        return _0x1d9923[0x2];
-    } else if (_0x1d9923['length'] === 0x1) {
-        return _0x3361ab;
+
+async function extractToken(input) {
+    // Vérifier si la chaîne est au format email:password:token
+    const parts = input.split(':');
+
+    if (parts.length === 3) {
+        return parts[2]; // Retourner uniquement le token
+    } else if (parts.length === 1) {
+        return input; // Si c'est déjà un token, le retourner tel quel
     } else {
-        console['warn']('Format\x20non\x20valide:', _0x3361ab);
-        return _0x3361ab;
+        console.warn('Format non valide:', input); // Avertissement pour les formats non valides
+        return input; // Gérer les formats non valides
     }
 }
-async function _0x46bd7d(_0x351d54) {
-    if (_0x351d54['length'] <= 0x6) {
-        return _0x351d54;
+
+async function maskTokenAll(token) {
+    // Vérifier la longueur du token
+    if (token.length <= 6) {
+        return token; // Retourner tel quel si le token est trop court
     }
-    const _0x5508a4 = _0x351d54['slice'](0x0, 0x14);
-    const _0x117a24 = _0x351d54['slice'](-0xa);
-    const _0x4ca751 = _0x351d54['length'] - _0x5508a4['length'] - _0x117a24['length'];
-    const _0x2c7790 = '' + _0x5508a4 + '*'['repeat'](_0x4ca751 - 0x46) + _0x117a24;
-    return _0x2c7790;
+    // Calculer la longueur à masquer
+    const start = token.slice(0, 20); // Prendre les 20 premiers caractères
+    const end = token.slice(-10); // Prendre les 10 derniers caractères
+    const maskedLength = token.length - start.length - end.length; // Longueur à masquer
+
+    // Masquer une partie plus grande du token
+    const maskedToken = `${start}${'*'.repeat(maskedLength - 70)}${end}`; // Masquer 70 caractères de plus
+    return maskedToken;
 }
-async function _0x516384(_0x2410b9) {
-    if (_0x2410b9['length'] <= 0x6) {
-        return _0x2410b9;
+
+async function maskToken(token) {
+    // Vérifier la longueur du token
+    if (token.length <= 6) {
+        return token; // Retourner tel quel si le token est trop court
     }
-    const _0x49b4bc = _0x2410b9['slice'](0x0, 0x6);
-    const _0xfe4a96 = _0x2410b9['slice'](-0xc);
-    const _0x3e99e5 = _0x2410b9['length'] - _0x49b4bc['length'] - _0xfe4a96['length'];
-    const _0x330f83 = '' + _0x49b4bc + '*'['repeat'](_0x3e99e5 - 0x2d) + _0xfe4a96;
-    return _0x330f83;
+    // Calculer la longueur à masquer
+    const start = token.slice(0, 6); // Prendre les 6 premiers caractères
+    const end = token.slice(-12); // Prendre les 12 derniers caractères
+    const maskedLength = token.length - start.length - end.length; // Longueur à masquer
+
+    // Masquer une partie plus grande du token
+    const maskedToken = `${start}${'*'.repeat(maskedLength - 45 )}${end}`; // Masquer 45 caractères de plus
+    return maskedToken;
 }
-async function _0x34150c(_0x560083, _0x1908de) {
-    let _0x1ff629 = await _0x46bd7d(_0x560083);
-    let _0x47417b = await _0x3257b3(_0x1908de);
-    let _0x36b394 = '';
-    if (!_0x3019c7['existsSync'](_0x1908de)) {
-        console['log'](_0x18b869['retro']('⛔\x20-\x20Le\x20fichier\x20n\x27existe\x20pas.'));
+
+async function deleteToken(token, cheminComplet) {
+    let tokenMasked = await maskTokenAll(token); // Mask the token for display
+    let countLine = await countLines(cheminComplet);
+    let newContent = '';
+    // Check if the file exists
+    if (!fs.existsSync(cheminComplet)) {
+        console.log(gradient.retro("⛔ - Le fichier n'existe pas."));
         return;
     }
-    const _0xce4a88 = [];
-    const _0x4216b1 = new _0x274031(_0x1908de);
-    _0x4216b1['on']('error', _0x5d72f5 => {
-        console['error'](_0x18b869['retro']('⛔\x20-\x20Erreur\x20lors\x20de\x20la\x20lecture\x20du\x20fichier\x20:\x20' + _0x5d72f5));
+
+    const linesToKeep = [];
+
+    // Read the file line by line
+    const lr = new LineByLineReader(cheminComplet);
+
+    lr.on('error', (err) => {
+        console.error(gradient.retro(`⛔ - Erreur lors de la lecture du fichier : ${err}`));
     });
-    _0x4216b1['on']('line', _0x2abc7a => {
-        const _0xaaeba0 = _0x2abc7a['trim']();
-        if (!_0xaaeba0['includes'](_0x560083['trim']())) {
-            _0xce4a88['push'](_0xaaeba0);
+
+    lr.on('line', (line) => {
+        const trimmedLine = line.trim(); 
+
+        // Check if the line contains the token
+        if (!trimmedLine.includes(token.trim())) {
+            linesToKeep.push(trimmedLine); // Keep the line if it doesn't contain the token
         }
     });
-    _0x4216b1['on']('end', async () => {
-        if (_0xce4a88['length'] === 0x0 && _0x47417b !== 0x1) {
-            console['log'](_0x18b869['retro']('⛔\x20-\x20Le\x20token\x20' + _0x1ff629 + '\x20n\x27a\x20pas\x20été\x20trouvé\x20dans\x20le\x20fichier.'));
-            return;
+
+    lr.on('end', async() => {
+        // Check if any lines were removed
+        if (linesToKeep.length === 0 && countLine !== 1) {
+            console.log(gradient.retro(`⛔ - Le token ${tokenMasked} n'a pas été trouvé dans le fichier.`));
+            return; // No matching token found, exit the function
         }
-        if (_0x47417b !== 0x1) {
-            _0x36b394 = _0xce4a88['join'](_0x488f06['EOL']);
+        if (countLine !== 1) {
+            // Write the new content back to the file
+            newContent = linesToKeep.join(os.EOL);
         } else {
-            _0x36b394 = '';
+            // If only one line is left, you might want to set newContent to an empty string
+            newContent = ''; // Or handle it as needed
         }
-        _0x3019c7['writeFile'](_0x1908de, _0x36b394, _0x25b217 => {
-            if (_0x25b217) {
-                console['error'](_0x18b869['retro']('⛔\x20-\x20Erreur\x20lors\x20de\x20l\x27écriture\x20du\x20fichier\x20:\x20' + _0x25b217));
+        fs.writeFile(cheminComplet, newContent, (err) => {
+            if (err) {
+                console.error(gradient.retro(`⛔ - Erreur lors de l'écriture du fichier : ${err}`));
                 return;
             }
-            console['log'](_0x18b869['retro']('🗑️\x20-\x20Le\x20token\x20' + _0x1ff629 + '\x20a\x20été\x20supprimé\x20avec\x20succès\x20du\x20fichier.'));
+            console.log(gradient.retro(`🗑️ - Le token ${tokenMasked} a été supprimé avec succès du fichier.`));
             return;
         });
     });
 }
-async function _0x3257b3(_0x2ffec8) {
+
+
+async function countLines(filePath) {
     try {
-        const _0x323135 = _0x3019c7['readFileSync'](_0x2ffec8, 'utf-8');
-        const _0x4fd6cc = _0x323135['split']('\x0a');
-        const _0x7b354e = _0x4fd6cc['filter'](_0x2fe02b => _0x2fe02b['trim']()['length'] > 0x0);
-        return _0x7b354e['length'];
-    } catch (_0x37ffee) {
-        console['error']('Erreur\x20lors\x20de\x20la\x20lecture\x20du\x20fichier\x20:', _0x37ffee);
-        return 0x0;
+      const data = fs.readFileSync(filePath, 'utf-8');
+      const lines = data.split('\n');
+      const nonEmptyLines = lines.filter(line => line.trim().length > 0);
+      return nonEmptyLines.length;
+    } catch (error) {
+      console.error('Erreur lors de la lecture du fichier :', error);
+      return 0;
     }
-}
-const _0x4da502 = async (_0x656530, _0x86bdd7 = 'order') => {
+  }
+
+// Function to send Discord notification
+const sendDiscordNotification = async (data, type = 'order') => {
     try {
-        const _0x47d3e8 = {
-            'embeds': [{
-                    'title': _0x86bdd7 === 'order' ? '🛍️\x20New\x20Order' : '📝\x20System\x20Log',
-                    'color': _0x86bdd7 === 'order' ? 0xff00 : 0x99ff,
-                    'timestamp': new Date()['toISOString'](),
-                    'fields': []
-                }]
+        const embed = {
+            embeds: [{
+                title: type === 'order' ? '🛍️ New Order' : '📝 System Log',
+                color: type === 'order' ? 0x00ff00 : 0x0099ff,
+                timestamp: new Date().toISOString(),
+                fields: []
+            }]
         };
-        if (_0x86bdd7 === 'order') {
-            const _0x55f524 = parseFloat(_0x656530['quantity']) || 0x0;
-            const _0x48b329 = parseFloat(_0x656530['nombre_boosts']) || 0x0;
-            const _0x43a006 = parseFloat(_0x656530['type_booster']) || 'N/A';
-            const _0xc5444c = parseFloat(_0x656530['price']) || 0x0;
-            const _0x1b3336 = (_0x55f524 * _0xc5444c)['toFixed'](0x2);
-            _0x47d3e8['embeds'][0x0]['fields'] = [
-                {
-                    'name': '🆔\x20Invoice\x20ID',
-                    'value': String(_0x656530['invoice_id']),
-                    'inline': ![]
-                },
-                {
-                    'name': '🏷️\x20Product',
-                    'value': _0x656530['products_name'] ? _0x656530['products_name'] : 'N/A',
-                    'inline': ![]
-                },
-                {
-                    'name': '📧\x20Email',
-                    'value': _0x656530['email'] ? _0x656530['email'] : 'N/A',
-                    'inline': ![]
-                },
-                {
-                    'name': '👤\x20Server\x20ID',
-                    'value': _0x656530['serveur_id'] ? _0x656530['serveur_id'] : 'N/A',
-                    'inline': ![]
-                },
-                {
-                    'name': '📦\x20Quantity',
-                    'value': String(_0x55f524),
-                    'inline': ![]
-                },
-                {
-                    'name': '📦\x20Number\x20boosts',
-                    'value': String(_0x48b329),
-                    'inline': ![]
-                },
-                {
-                    'name': '📦\x20Type\x20boosts',
-                    'value': String(_0x43a006) + 'm',
-                    'inline': ![]
-                },
-                {
-                    'name': '💰\x20Unit\x20Price',
-                    'value': String(_0xc5444c) + '€',
-                    'inline': ![]
-                },
-                {
-                    'name': '💶\x20Total\x20Price',
-                    'value': String(_0x1b3336) + '€',
-                    'inline': ![]
-                },
-                {
-                    'name': '💳\x20Gateway',
-                    'value': _0x656530['gateway'] ? _0x656530['gateway'] : 'N/A',
-                    'inline': ![]
-                }
+
+        if (type === 'order') {
+            const quantity = parseFloat(data.quantity) || 0;
+            const nombre_boosts = parseFloat(data.nombre_boosts) || 0;
+            const type_booster = parseFloat(data.type_booster) || 'N/A';
+            const price = parseFloat(data.price) || 0;
+            const totalPrice = (quantity * price).toFixed(2);
+
+            embed.embeds[0].fields = [
+                { name: '🆔 Invoice ID', value: String(data.invoice_id), inline: false },
+                { name: '🏷️ Product', value: data.products_name ? data.products_name : 'N/A', inline: false },
+                { name: '📧 Email', value: data.email ? data.email : 'N/A', inline: false },
+                { name: '👤 Server ID', value: data.serveur_id ? data.serveur_id : 'N/A', inline: false },
+                { name: '📦 Quantity', value: String(quantity), inline: false },
+                { name: '📦 Number boosts', value: String(nombre_boosts), inline: false },
+                { name: '📦 Type boosts', value: String(type_booster)+"m", inline: false },
+                { name: '💰 Unit Price', value: String(price) + '€', inline: false },
+                { name: '💶 Total Price', value: String(totalPrice) + '€', inline: false },
+                { name: '💳 Gateway', value: data.gateway ? data.gateway : 'N/A', inline: false }
             ];
         } else {
-            _0x47d3e8['embeds'][0x0]['description'] = _0x656530;
-            if (_0x656530['includes']('Order\x20Delivered')) {
-                _0x47d3e8['embeds'][0x0]['title'] = '✅\x20Order\x20Delivered';
-                _0x47d3e8['embeds'][0x0]['color'] = 0xff00;
-            } else if (_0x656530['includes']('Delivery\x20Error')) {
-                _0x47d3e8['embeds'][0x0]['title'] = '❌\x20Delivery\x20Error';
-                _0x47d3e8['embeds'][0x0]['color'] = 0xff0000;
-            } else if (_0x656530['includes']('Duplicate\x20Order')) {
-                _0x47d3e8['embeds'][0x0]['title'] = '⚠️\x20Duplicate\x20Order';
-                _0x47d3e8['embeds'][0x0]['color'] = 0xffa500;
+            embed.embeds[0].description = data;
+            if (data.includes('Order Delivered')) {
+                embed.embeds[0].title = '✅ Order Delivered';
+                embed.embeds[0].color = 0x00ff00;
+            } else if (data.includes('Delivery Error')) {
+                embed.embeds[0].title = '❌ Delivery Error';
+                embed.embeds[0].color = 0xff0000;
+            } else if (data.includes('Duplicate Order')) {
+                embed.embeds[0].title = '⚠️ Duplicate Order';
+                embed.embeds[0].color = 0xffa500;
             } else {
-                _0x47d3e8['embeds'][0x0]['title'] = '⚠️\x20Unknown\x20Event';
-                _0x47d3e8['embeds'][0x0]['color'] = 0xffa500;
+                embed.embeds[0].title = '⚠️ Unknown Event';
+                embed.embeds[0].color = 0xffa500;
             }
         }
-        await _0x142702['send']({ 'embeds': [_0x47d3e8['embeds'][0x0]] });
-    } catch (_0x385982) {
-        console['error']('Error\x20sending\x20Discord\x20webhook\x20commands\x20logs:', _0x385982['response']?.['data'] || _0x385982['message']);
+        // Use the webhook client to send the embed
+        await webhookClientCommand.send({
+            embeds: [embed.embeds[0]] // Send the embed directly
+        });
+    } catch (error) {
+        console.error('Error sending Discord webhook commands logs:', error.response?.data || error.message);
     }
 };
-async function _0x3196a7(_0x35e5dd) {
+
+async function sendWebhookMessage(embed) {
     try {
-        const _0x48b3a2 = await _0x33057c['send']({ 'embeds': [_0x35e5dd] });
-        return _0x48b3a2['id'];
-    } catch (_0x55d43a) {
-        console['error']('Error\x20sending\x20Discord\x20webhook\x20message:', _0x55d43a['response']?.['data'] || _0x55d43a['message']);
-        throw _0x55d43a;
+        const response = await webhookClient.send({
+            embeds: [embed]
+        });
+        return response.id; // Return the message ID for editing later
+    } catch (error) {
+        console.error('Error sending Discord webhook message:', error.response?.data || error.message);
+        throw error; // Re-throw the error for further handling if needed
     }
 }
-async function _0x4ea383(_0x38b194, _0x4b9975) {
+
+async function editWebhookMessage(messageId, newEmbed) {
     try {
-        await _0x33057c['editMessage'](_0x38b194, { 'embeds': [_0x4b9975] });
-    } catch (_0x2f1cfb) {
-        console['error']('Error\x20editing\x20Discord\x20webhook\x20message:', _0x2f1cfb['response']?.['data'] || _0x2f1cfb['message']);
-        throw _0x2f1cfb;
+        await webhookClient.editMessage(messageId, {
+            embeds: [newEmbed]
+        });
+    } catch (error) {
+        console.error('Error editing Discord webhook message:', error.response?.data || error.message);
+        throw error; // Re-throw the error for further handling if needed
     }
 }
-const _0x29b74b = (_0x36fefe, _0xa6431b, _0x2e3228, _0x3bb765 = 0xc8) => {
-    if (_0xa6431b === 'write') {
-        _0x36fefe['writeHead'](_0x3bb765, { 'Content-Type': 'text/plain' });
-        _0x36fefe['write'](_0x2e3228);
+
+const handleResponse = (res, mode, data, statusCode = 200) => {
+    if (mode === 'write') {
+        res.writeHead(statusCode, { 'Content-Type': 'text/plain' });
+        res.write(data);
     } else {
-        _0x36fefe['writeHead'](_0x3bb765, { 'Content-Type': 'application/json' });
-        _0x36fefe['end'](JSON['stringify'](_0x2e3228));
+        res.writeHead(statusCode, { 'Content-Type': 'application/json' });
+        res.end(JSON.stringify(data));
     }
 };
-const _0x4b6252 = async (_0x148280, _0x8c67f4 = 0xc) => {
+
+const checkIfBotIsAvailable = async (serveurID, retries = 12) => {
     try {
-        const _0x1958de = await _0x405f39['post']('https://panel.infinityboost.monster/api/v4/api?apikey=' + _0x3d4694 + '&machineid=' + _0x19d548 + '&shopname=' + _0x378f48 + '&mode=CHECK_BOT&guildid=' + _0x148280 + '&clientid=' + _0xbe1552 + '&botclientsecret=' + _0x1c18a4 + '&bottoken=' + _0x744567, {}, { 'timeout': 0xf4240 });
-        const {erreur: _0x1f73cf} = _0x1958de['data'];
-        return _0x1f73cf !== 'bot';
-    } catch (_0x39e2d7) {
-        console['error']('Erreur\x20lors\x20de\x20la\x20vérification\x20du\x20bot:', _0x39e2d7);
-        return ![];
+        const response = await axios.post(`https://panel.infinityboost.monster/api/v4/api?apikey=${apikey}&machineid=${machineID}&shopname=${name}&mode=CHECK_BOT&guildid=${serveurID}&clientid=${clientbot}&botclientsecret=${clientsecret}&bottoken=${tokenbot}`, {}, { timeout: 1000000 });
+        const { erreur } = response.data;
+        return erreur !== 'bot';
+    } catch (error) {
+        console.error('Erreur lors de la vérification du bot:', error);
+        return false;
     }
 };
-const _0x4649bc = async (_0x15fa9c, _0x3e0367, _0xca685d) => {
+const handleBooster = async (requestData, mode, res) => {
     try {
-        await _0x3b8a46();
-        const _0x5daa55 = _0x15fa9c['item'];
-        if (!_0x5daa55) {
-            console['log']('[' + new Date()['toISOString']() + ']\x20Données\x20item\x20manquantes');
-            return _0x29b74b(_0xca685d, _0x3e0367, _0x2d30cd['command']['106'], 0x190);
+        await initializeMachineID();
+        const item = requestData.item;
+        if (!item) {
+            console.log(`[${new Date().toISOString()}] Données item manquantes`);
+            return handleResponse(res, mode, translations['command']['106'], 400);
         }
-        const _0x44d9c4 = parseInt(_0x5daa55['quantity'], 0xa) || 0x1;
-        const _0x21aa85 = _0x5daa55['custom_fields']?.[_0x1f0961];
-        const _0x28ee86 = _0x5daa55['custom_fields']?.[_0x579717] || _0x284b38;
-        const _0x45d036 = _0x5daa55['product']?.['name'];
-        const _0x57696c = '/stock/';
-        let _0x240ebd = _0x3c39ca['join'](__dirname, '..', _0x57696c, 'stock-1m.txt');
-        let _0x416919 = _0x3c39ca['join'](__dirname, '..', _0x57696c, 'stock-3m.txt');
-        let _0x3ce3f4;
-        console['log']('[' + new Date()['toISOString']() + ']\x20Commande\x20reçue\x20pour\x20le\x20serveur:\x20' + _0x21aa85);
-        if (!_0x21aa85 || !_0x45d036) {
-            console['log']('[' + new Date()['toISOString']() + ']\x20Données\x20manquantes:\x20' + (!_0x21aa85 ? 'serveurID' : 'products_name'));
-            return _0x29b74b(_0xca685d, _0x3e0367, _0x2d30cd['command']['105'], 0x190);
+
+        // Extraction des données spécifiques
+        const amount = parseInt(item.quantity, 10) || 1;
+        const serveurID = item.custom_fields?.[guildid_variable_Custom_Field];
+        const bio = item.custom_fields?.[bio_variable_Custom_Field] || autobuybio;
+        const products_name = item.product?.name;
+        const emplacementFichierAuth = '/stock/';
+        let stock_1m = path.join(__dirname, '..', emplacementFichierAuth, `stock-1m.txt`);
+        let stock_3m = path.join(__dirname, '..', emplacementFichierAuth, `stock-3m.txt`);
+        let stock_path;
+
+        console.log(`[${new Date().toISOString()}] Commande reçue pour le serveur: ${serveurID}`);
+       
+        // Vérification des données requises
+        if (!serveurID || !products_name) {
+            console.log(`[${new Date().toISOString()}] Données manquantes: ${!serveurID ? 'serveurID' : 'products_name'}`);
+            return handleResponse(res, mode, translations['command']['105'], 400);
         }
-        const _0x119a73 = _0x45d036['match'](/\[(\d+)\]/);
-        const _0x15fca2 = _0x45d036['match'](/boost (1|3) Mois/);
-        if (!_0x119a73 || !_0x15fca2) {
-            await _0x4da502('Delivery\x20Error,\x20invoice_id:\x20' + _0x5daa55['invoice_id'], 'log');
-            return _0x29b74b(_0xca685d, _0x3e0367, _0x2d30cd['command']['105'], 0xc8);
+
+        // Extraction des informations du nom du produit
+        const match = products_name.match(/\[(\d+)\]/);
+        const matchtype = products_name.match(/boost (1|3) Mois/);
+
+        if (!match || !matchtype) {
+            await sendDiscordNotification('Delivery Error, invoice_id: ' + item.invoice_id, 'log');
+            return handleResponse(res, mode, translations['command']['105'], 200);
         }
-        const _0x2dcdce = parseInt(_0x119a73[0x1], 0xa);
-        const _0x45e55e = _0x2dcdce * _0x44d9c4;
-        const _0x56059a = parseInt(_0x15fca2[0x1], 0xa);
-        const _0x27affb = _0x56059a === 0x3 ? '3m' : '1m';
-        if (_0x27affb === '1m') {
-            _0x3ce3f4 = _0x240ebd;
-        } else if (_0x27affb === '3m') {
-            _0x3ce3f4 = _0x416919;
+
+        const unitPrice = parseInt(match[1], 10);
+        const totalPrice = unitPrice * amount;
+        const boostDuration = parseInt(matchtype[1], 10);
+        const typeboost = boostDuration === 3 ? "3m" : "1m";
+        
+        if(typeboost === "1m") {
+            stock_path = stock_1m;
+        } else if(typeboost === "3m") {
+            stock_path = stock_3m;
         }
-        await _0x4da502({
-            'invoice_id': _0x5daa55['invoice_id'],
-            'serveur_id': _0x21aa85,
-            'quantity': _0x44d9c4,
-            'price': _0x5daa55['price'],
-            'mode': _0x3e0367,
-            'products_name': _0x45d036,
-            'gateway': _0x15fa9c['gateway'],
-            'nombre_boosts': _0x45e55e,
-            'type_booster': _0x27affb
+
+        await sendDiscordNotification({
+            invoice_id: item.invoice_id,
+            serveur_id: serveurID,
+            quantity: amount,
+            price: item.price,
+            mode: mode,
+            products_name: products_name,
+            gateway: requestData.gateway,
+            nombre_boosts: totalPrice,
+            type_booster: typeboost
         }, 'order');
-        let _0x533b1e = _0x3019c7['existsSync'](_0x5bc76d) ? JSON['parse'](_0x3019c7['readFileSync'](_0x5bc76d)) : [];
-        if (_0x533b1e['find'](_0x192c3b => _0x192c3b['invoice_id'] === _0x5daa55['invoice_id'])) {
-            await _0x4da502('Duplicate\x20Order,\x20invoice_id:\x20' + _0x5daa55['invoice_id'], 'log');
-            return _0x29b74b(_0xca685d, _0x3e0367, _0x2d30cd['command']['104'], 0xc8);
-        }
-        const _0x329222 = {
-            'invoice_id': _0x5daa55['invoice_id'],
-            'email': _0x5daa55['email'],
-            'amount': _0x44d9c4,
-            'price': _0x5daa55['total_price'],
-            'gateway': _0x15fa9c['gateway'],
-            'serveurID': _0x21aa85,
-            'status': _0x5daa55['status'],
-            'custom_fields': _0x5daa55['custom_fields'],
-            'product_name': _0x45d036
+
+        // Vérification des commandes existantes
+        let commandes = fs.existsSync(paths) ? JSON.parse(fs.readFileSync(paths)) : [];
+        if (commandes.find(cmd => cmd.invoice_id === item.invoice_id)) {
+            await sendDiscordNotification('Duplicate Order, invoice_id: ' + item.invoice_id, 'log');
+            return handleResponse(res, mode, translations['command']['104'], 200);
+        } 
+
+        // Sauvegarde de la nouvelle commande
+        const nouvelleCommande = {
+            invoice_id: item.invoice_id,
+            email: item.email,
+            amount,
+            price: item.total_price,
+            gateway: requestData.gateway,
+            serveurID,
+            status: item.status,
+            custom_fields: item.custom_fields,
+            product_name: products_name
         };
-        _0x533b1e['push'](_0x329222);
-        _0x3019c7['writeFileSync'](_0x5bc76d, JSON['stringify'](_0x533b1e, null, 0x2));
-        let _0x205db6 = 0x0;
-        let _0xdb425f = 0x0;
-        let _0x46edb9 = _0x45e55e / 0x2;
-        let _0x310057 = ![];
-        let _0x345cc8 = 0x0;
-        const _0x10b975 = 0x6;
-        let _0x1c65d8 = [];
-        let _0x544bd0 = '[+]\x20' + _0x378f48 + '\x20initialisés.';
-        if (_0x1c65d8['length'] >= _0x10b975) {
-            _0x1c65d8['pop']();
+        commandes.push(nouvelleCommande);
+        fs.writeFileSync(paths, JSON.stringify(commandes, null, 2));
+
+        let boostCounts = 0;
+        let boostCountsFailed = 0;
+        let boosttttt = totalPrice / 2;
+        let botAvailable = false;
+        let verifCounts = 0;
+        const limitedLogs = 6; 
+        let savedLogs =  [];
+        let newLog = `[+] `+name+` initialisés.`;
+        if (savedLogs.length >= limitedLogs) {
+            savedLogs.pop();
         }
-        _0x1c65d8['unshift'](_0x544bd0);
-        let _0x52743f = await _0x3257b3(_0x3ce3f4);
-        if (_0x52743f === 0x0) {
-            _0x1c65d8['unshift'](_0x378f48 + '\x20' + _0x2d30cd['command']['13']);
-            const _0x4e98aa = {
-                'color': 0x99ff,
-                'title': 'AutoBuy\x20-\x20🚀\x20**Boost\x20' + _0x2d30cd['command']['23'] + '**\x20🚀',
-                'description': '🔹\x20Boosts\x20' + _0x2d30cd['command']['22'] + ('\x20:\x20**0/' + _0x45e55e + '**\x0a🔸\x20Boosts\x20') + _0x2d30cd['command']['28'] + ('\x20:\x20**' + _0x45e55e + '/' + _0x45e55e + '**\x0a\x20📝\x20Server\x20id:\x20') + _0x21aa85,
-                'fields': _0x1c65d8['length'] > 0x0 ? [{
-                        'name': 'Logs',
-                        'value': '```\x0a' + _0x1c65d8['join']('\x0a') + '\x0a```',
-                        'inline': ![]
-                    }] : [],
-                'image': { 'url': _0x5efbd2 },
-                'timestamp': new Date()['toISOString'](),
-                'footer': { 'text': _0x378f48 + '\x20-\x20' + _0x2d30cd['command']['7'] + '\x20MrX' }
+        savedLogs.unshift(newLog);
+        let stock_counts = await countLines(stock_path);
+        if(stock_counts === 0) {
+            savedLogs.unshift(name+" "+translations['command']['13']);
+            const initialEmbed = {
+                color: 0x0099ff,
+                title: 'AutoBuy - 🚀 **Boost ' + translations['command']['23'] + '** 🚀',
+                description: `🔹 Boosts ` + translations['command']['22'] + ` : **0/${totalPrice}**\n🔸 Boosts ` + translations['command']['28'] + ` : **${totalPrice}/${totalPrice}**\n 📝 Server id: ` + serveurID,
+                fields: savedLogs.length > 0 ? [{
+                    name: "Logs",
+                    value: "```\n" + savedLogs.join("\n") + "\n```",
+                    inline: false // Ensure this is a boolean
+                }] : [],
+                image: { url: bannier }, // Ensure bannier is a valid URL
+                timestamp: new Date().toISOString(), // Use ISO format for the timestamp
+                footer: { text: `${name} - ${translations['command']['7']} MrX` } // Use template literals for better readability
             };
-            _0x29b74b(_0xca685d, _0x3e0367, _0x2d30cd['command']['33'], 0xc8);
-            return await _0x3196a7(_0x4e98aa);
-        } else if (_0x45e55e / 0x2 > _0x52743f && _0x52743f !== _0x45e55e / 0x2) {
-            _0x1c65d8['unshift'](_0x378f48 + '\x20' + _0x2d30cd['command']['67']);
-            const _0x3f2683 = {
-                'color': 0x99ff,
-                'title': 'AutoBuy\x20-\x20🚀\x20**Boost\x20' + _0x2d30cd['command']['23'] + '**\x20🚀',
-                'description': '🔹\x20Boosts\x20' + _0x2d30cd['command']['22'] + ('\x20:\x20**0/' + _0x45e55e + '**\x0a🔸\x20Boosts\x20') + _0x2d30cd['command']['28'] + ('\x20:\x20**' + _0x45e55e + '/' + _0x45e55e + '**\x0a\x20📝\x20Server\x20id:\x20') + _0x21aa85,
-                'fields': _0x1c65d8['length'] > 0x0 ? [{
-                        'name': 'Logs',
-                        'value': '```\x0a' + _0x1c65d8['join']('\x0a') + '\x0a```',
-                        'inline': ![]
-                    }] : [],
-                'image': { 'url': _0x5efbd2 },
-                'timestamp': new Date()['toISOString'](),
-                'footer': { 'text': _0x378f48 + '\x20-\x20' + _0x2d30cd['command']['7'] + '\x20MrX' }
+            handleResponse(res, mode, translations['command']['33'], 200);
+            return await sendWebhookMessage(initialEmbed);
+        } else if(totalPrice / 2 > stock_counts && stock_counts !== totalPrice / 2) {
+            savedLogs.unshift(name+" "+translations['command']['67']);
+            const initialEmbed = {
+                color: 0x0099ff,
+                title: 'AutoBuy - 🚀 **Boost ' + translations['command']['23'] + '** 🚀',
+                description: `🔹 Boosts ` + translations['command']['22'] + ` : **0/${totalPrice}**\n🔸 Boosts ` + translations['command']['28'] + ` : **${totalPrice}/${totalPrice}**\n 📝 Server id: ` + serveurID,
+                fields: savedLogs.length > 0 ? [{
+                    name: "Logs",
+                    value: "```\n" + savedLogs.join("\n") + "\n```",
+                    inline: false // Ensure this is a boolean
+                }] : [],
+                image: { url: bannier }, // Ensure bannier is a valid URL
+                timestamp: new Date().toISOString(), // Use ISO format for the timestamp
+                footer: { text: `${name} - ${translations['command']['7']} MrX` } // Use template literals for better readability
             };
-            _0x29b74b(_0xca685d, _0x3e0367, _0x2d30cd['command']['33'], 0xc8);
-            return await _0x3196a7(_0x3f2683);
+            handleResponse(res, mode, translations['command']['33'], 200);
+            return await sendWebhookMessage(initialEmbed);
         }
-        while (!_0x310057 && _0x345cc8 < 0xf) {
+        // Vérification de la disponibilité du bot
+        while (!botAvailable && verifCounts < 15) {
             try {
-                _0x310057 = await _0x4b6252(_0x21aa85);
-                if (!_0x310057) {
-                    _0x345cc8++;
-                    const _0x2993d5 = _0x345cc8 * 0xf;
-                    await _0x4da502(_0x2d30cd['command']['97'] + '\x20' + _0x345cc8 + '/15\x20' + _0x2d30cd['command']['98'] + '\x20' + _0x2993d5 + '\x20' + _0x2d30cd['command']['99'] + ',\x20invoice_id:\x20' + _0x5daa55['invoice_id'] + '.', _0x1ced72);
-                    if (_0x345cc8 < 0xf) {
-                        await new Promise(_0x51e063 => setTimeout(_0x51e063, 0xf * 0x3c * 0x3e8));
+                botAvailable = await checkIfBotIsAvailable(serveurID);
+                if (!botAvailable) {
+                    verifCounts++;
+                    const minutesWaited = verifCounts * 15;
+                    await sendDiscordNotification(`${translations['command']['97']} ${verifCounts}/15 ${translations['command']['98']} ${minutesWaited} ${translations['command']['99']}, invoice_id: ${item.invoice_id}.`, discordWebhookLOG);
+                    if (verifCounts < 15) {
+                        await new Promise(resolve => setTimeout(resolve, 15 * 60 * 1000));
                     }
                 }
-            } catch (_0x33024b) {
-                console['error']('Erreur\x20lors\x20de\x20la\x20vérification\x20du\x20bot:\x20' + _0x33024b['message'] + ',\x20invoice_id:\x20' + _0x5daa55['invoice_id'] + '.');
-                await _0x4da502('Delivery\x20Error,\x20invoice_id:\x20' + _0x5daa55['invoice_id'], 'log');
-                _0x345cc8++;
-                if (_0x345cc8 < 0xf) {
-                    await new Promise(_0xf46245 => setTimeout(_0xf46245, 0xf * 0x3c * 0x3e8));
+            } catch (error) {
+                console.error(`Erreur lors de la vérification du bot: ${error.message}, invoice_id: ${item.invoice_id}.`);
+                await sendDiscordNotification('Delivery Error, invoice_id: ' + item.invoice_id, 'log');
+                verifCounts++;
+                if (verifCounts < 15) {
+                    await new Promise(resolve => setTimeout(resolve, 15 * 60 * 1000));
                 }
             }
         }
-        if (!_0x310057) {
-            return _0x29b74b(_0xca685d, _0x3e0367, _0x2d30cd['command']['96'], 0xc8);
+
+        if (!botAvailable) {
+            return handleResponse(
+                res,
+                mode,
+                translations['command']['96'],
+                200
+            );
         }
-        const _0x98e664 = {
-            'color': 0x99ff,
-            'title': 'AutoBuy\x20-\x20🚀\x20**Boost\x20' + _0x2d30cd['command']['23'] + '**\x20🚀',
-            'description': '🔹\x20Boosts\x20' + _0x2d30cd['command']['22'] + ('\x20:\x20**0/' + _0x45e55e + '**\x0a🔸\x20Boosts\x20') + _0x2d30cd['command']['28'] + ('\x20:\x20**0/' + _0x45e55e + '**\x0a\x20📝\x20Server\x20id:\x20') + _0x21aa85,
-            'fields': _0x1c65d8['length'] > 0x0 ? [{
-                    'name': 'Logs',
-                    'value': '```\x0a' + _0x1c65d8['join']('\x0a') + '\x0a```',
-                    'inline': ![]
-                }] : [],
-            'image': { 'url': _0x5efbd2 },
-            'timestamp': new Date()['toISOString'](),
-            'footer': { 'text': _0x378f48 + '\x20-\x20' + _0x2d30cd['command']['7'] + '\x20MrX' }
+
+        // Application des boosts
+        const initialEmbed = {
+            color: 0x0099ff,
+            title: 'AutoBuy - 🚀 **Boost ' + translations['command']['23'] + '** 🚀',
+            description: `🔹 Boosts ` + translations['command']['22'] + ` : **0/${totalPrice}**\n🔸 Boosts ` + translations['command']['28'] + ` : **0/${totalPrice}**\n 📝 Server id: ` + serveurID,
+            fields: savedLogs.length > 0 ? [{
+                name: "Logs",
+                value: "```\n" + savedLogs.join("\n") + "\n```",
+                inline: false // Ensure this is a boolean
+            }] : [],
+            image: { url: bannier }, // Ensure bannier is a valid URL
+            timestamp: new Date().toISOString(), // Use ISO format for the timestamp
+            footer: { text: `${name} - ${translations['command']['7']} MrX` } // Use template literals for better readability
         };
-        const _0xdf8ef3 = await _0x3196a7(_0x98e664);
-        const _0x26d831 = _0x3019c7['readFileSync'](_0x3ce3f4)['toString']()['split']('\x0a');
-        for (let _0x3638fd = 0x0; _0x3638fd < _0x45e55e / 0x2; _0x3638fd++) {
-            let _0x5a0d9d = 0x0;
-            async function _0x181a1d(_0x4747d9 = 0x0) {
+        
+        // Send the embed as part of the webhook message
+        const initialMessageId = await sendWebhookMessage(initialEmbed);
+        const tokens = fs.readFileSync(stock_path).toString().split("\n");
+        for (let i = 0; i < totalPrice / 2; i++) {
+            let retry = 0;
+            async function Boosting(retry = 0) {
                 try {
-                    const _0x482a34 = _0x26d831[_0x3638fd];
-                    const _0x4fa932 = await _0x50b135(_0x482a34);
-                    const _0x307036 = await _0x405f39['post']('https://panel.infinityboost.monster/api/v4/api?apikey=' + _0x3d4694 + '&machineid=' + _0x19d548 + '&shopname=' + _0x378f48 + '&mode=BOOST&guildid=' + _0x21aa85 + '&bio=' + _0x28ee86 + '&clientid=' + _0xbe1552 + '&botclientsecret=' + _0x1c18a4 + '&bottoken=' + _0x744567 + '&tokenboost=' + _0x4fa932, {}, { 'timeout': 0xf4240 });
-                    const {
-                        erreur: _0x5b83f7,
-                        success: _0x42326d
-                    } = _0x307036['data'];
-                    if (_0x1c65d8['length'] >= _0x10b975) {
-                        _0x1c65d8['pop']();
+                    const token_og = tokens[i];
+                    const token = await extractToken(token_og);
+                    const response = await axios.post(
+                        `https://panel.infinityboost.monster/api/v4/api?apikey=${apikey}&machineid=${machineID}&shopname=${name}&mode=BOOST&guildid=${serveurID}&bio=${bio}&clientid=${clientbot}&botclientsecret=${clientsecret}&bottoken=${tokenbot}&tokenboost=${token}`,
+                        {},
+                        { timeout: 1000000 }
+                    );
+                    const { erreur, success } = response.data;
+                    if (savedLogs.length >= limitedLogs) {
+                        savedLogs.pop();
                     }
-                    if (_0x42326d === !![]) {
-                        _0x205db6++;
-                        _0x1c65d8['unshift']('✅\x20-\x20' + _0x2d30cd['command']['81'] + '\x20:\x20' + await _0x516384(_0x4fa932));
-                        await _0x34150c(_0x482a34, _0x3ce3f4);
-                    } else if (_0x42326d === ![]) {
-                        _0xdb425f++;
-                        if (_0x5b83f7 === 'invalid') {
-                            _0x1c65d8['unshift']('❌\x20-\x20' + _0x2d30cd['command']['80'] + '\x20:\x20' + await _0x516384(_0x4fa932));
-                            await _0x34150c(_0x482a34, _0x3ce3f4);
-                        } else if (_0x5b83f7 === 'perm') {
-                            _0x1c65d8['unshift']('⛔\x20-\x20' + _0x2d30cd['command']['79'] + '\x20:\x20' + await _0x516384(_0x4fa932));
-                            if (_0x4747d9 < 0x3) {
-                                _0x4747d9++;
-                                _0x1c65d8['unshift']('🔄️\x20-\x20retry\x20for\x20:\x20' + await _0x516384(_0x4fa932));
-                                await _0x181a1d(_0x4747d9);
+                    if (success === true) { 
+                        boostCounts++; 
+                        savedLogs.unshift('✅ - '+translations['command']['81']+' : ' + await maskToken(token)); // Ajout au log
+                        await deleteToken(token_og, stock_path);
+                    } else if (success === false) { 
+                        boostCountsFailed++; 
+                        if (erreur === 'invalid') {
+                            savedLogs.unshift('❌ - '+translations['command']['80']+' : ' + await maskToken(token)); // Ajout au log
+                            await deleteToken(token_og, stock_path);
+                        } else if (erreur === 'perm') { 
+                            savedLogs.unshift('⛔ - '+translations['command']['79']+' : ' + await maskToken(token)); // Ajout au log
+                            if (retry < 3) {
+                                retry++;
+                                savedLogs.unshift('🔄️ - retry for : ' + await maskToken(token));
+                                await Boosting(retry);
                             }
-                        } else if (_0x5b83f7 === 'used') {
-                            _0x1c65d8['unshift']('⚠️\x20-\x20' + _0x2d30cd['command']['78'] + '\x20:\x20' + await _0x516384(_0x4fa932));
-                            await _0x34150c(_0x482a34, _0x3ce3f4);
+                        } else if (erreur === 'used') {
+                            savedLogs.unshift('⚠️ - '+translations['command']['78']+' : ' + await maskToken(token)); // Ajout au log
+                            await deleteToken(token_og, stock_path);
                         } else {
-                            _0x1c65d8['unshift']('⚠️\x20-\x20error\x20:\x20' + await _0x516384(_0x4fa932));
-                            if (_0x4747d9 < 0x3) {
-                                _0x4747d9++;
-                                _0x1c65d8['unshift']('🔄️\x20-\x20retry\x20for\x20:\x20' + await _0x516384(_0x4fa932));
-                                await _0x181a1d(_0x4747d9);
+                            savedLogs.unshift('⚠️ - error : ' + await maskToken(token)); // Ajout au log
+                            if (retry < 3) {
+                                retry++;
+                                savedLogs.unshift('🔄️ - retry for : ' + await maskToken(token));
+                                await Boosting(retry);
                             }
                         }
                     }
-                } catch {
-                    _0xdb425f++;
-                    if (_0x4747d9 < 0x3) {
-                        _0x4747d9++;
-                        _0x1c65d8['unshift']('🔄️\x20-\x20retry');
-                        await _0x181a1d(_0x4747d9);
+                    } catch {
+                        boostCountsFailed++;
+                        if (retry < 3) {
+                            retry++;
+                            savedLogs.unshift('🔄️ - retry');
+                            await Boosting(retry);
+                        }
+                        savedLogs.unshift('⚠️ - error API'); // Ajout au log
                     }
-                    _0x1c65d8['unshift']('⚠️\x20-\x20error\x20API');
                 }
-            }
-            await _0x181a1d(_0x5a0d9d);
-            const _0x55236c = {
-                'color': 0x99ff,
-                'title': 'AutoBuy\x20-\x20🚀\x20**Boost\x20' + _0x2d30cd['command']['23'] + '**\x20🚀',
-                'description': '🔹\x20Boosts\x20' + _0x2d30cd['command']['22'] + ('\x20:\x20**' + _0x205db6 * 0x2 + '/' + _0x45e55e + '**\x0a🔸\x20Boosts\x20') + _0x2d30cd['command']['28'] + ('\x20:\x20**' + _0xdb425f * 0x2 + '/' + _0x45e55e + '**\x0a\x20📝\x20Server\x20id:\x20') + _0x21aa85,
-                'fields': _0x1c65d8['length'] > 0x0 ? [{
-                        'name': 'Logs',
-                        'value': '```\x0a' + _0x1c65d8['join']('\x0a') + '\x0a```',
-                        'inline': ![]
+                await Boosting(retry);
+                const embed = {
+                    color: 0x0099ff,
+                    title: 'AutoBuy - 🚀 **Boost ' + translations['command']['23'] + '** 🚀',
+                    description: `🔹 Boosts ` + translations['command']['22'] + ` : **${boostCounts * 2}/${totalPrice}**\n🔸 Boosts ` + translations['command']['28'] + ` : **${boostCountsFailed * 2}/${totalPrice}**\n 📝 Server id: ` + serveurID,
+                    fields: savedLogs.length > 0 ? [{
+                        name: "Logs",
+                        value: "```\n" + savedLogs.join("\n") + "\n```",
+                        inline: false // Ensure this is a boolean
                     }] : [],
-                'image': { 'url': _0x5efbd2 },
-                'timestamp': new Date()['toISOString'](),
-                'footer': { 'text': _0x378f48 + '\x20-\x20' + _0x2d30cd['command']['7'] + '\x20MrX' }
-            };
-            await _0x4ea383(_0xdf8ef3, _0x55236c);
+                    image: { url: bannier }, // Ensure bannier is a valid URL
+                    timestamp: new Date().toISOString(), // Use ISO format for the timestamp
+                    footer: { text: `${name} - ${translations['command']['7']} MrX` } // Use template literals for better readability
+                };
+                await editWebhookMessage(initialMessageId, embed);
         }
-        const _0x53b9f0 = {
-            'color': 0x99ff,
-            'title': 'AutoBuy\x20-\x20🚀\x20**Boost\x20' + _0x2d30cd['command']['21'] + '**\x20🚀',
-            'description': '🔹\x20Boosts\x20' + _0x2d30cd['command']['22'] + ('\x20:\x20**' + _0x205db6 * 0x2 + '/' + _0x45e55e + '**\x0a🔸\x20Boosts\x20') + _0x2d30cd['command']['28'] + ('\x20:\x20**' + _0xdb425f * 0x2 + '/' + _0x45e55e + '**\x0a📝\x20Server\x20id:\x20') + _0x21aa85,
-            'fields': _0x1c65d8['length'] > 0x0 ? [{
-                    'name': 'Logs',
-                    'value': '```\x0a' + _0x1c65d8['join']('\x0a') + '\x0a```',
-                    'inline': ![]
-                }] : [],
-            'image': { 'url': _0x5efbd2 },
-            'timestamp': new Date()['toISOString'](),
-            'footer': { 'text': _0x378f48 + '\x20-\x20' + _0x2d30cd['command']['7'] + '\x20MrX' }
+        const embed = {
+            color: 0x0099ff,
+            title: 'AutoBuy - 🚀 **Boost ' + translations['command']['21'] + '** 🚀',
+            description: `🔹 Boosts ` + translations['command']['22'] + ` : **${boostCounts * 2}/${totalPrice}**\n🔸 Boosts ` + translations['command']['28'] + ` : **${boostCountsFailed * 2}/${totalPrice}**\n📝 Server id: ` + serveurID,
+            fields: savedLogs.length > 0 ? [{
+                name: "Logs",
+                value: "```\n" + savedLogs.join("\n") + "\n```",
+                inline: false // Ensure this is a boolean
+            }] : [],
+            image: { url: bannier }, // Ensure bannier is a valid URL
+            timestamp: new Date().toISOString(), // Use ISO format for the timestamp
+            footer: { text: `${name} - ${translations['command']['7']} MrX` } // Use template literals for better readability
         };
-        await _0x4ea383(_0xdf8ef3, _0x53b9f0);
-        if (_0x205db6 >= _0x46edb9) {
-            await _0x4da502('Order\x20Delivered,\x20' + _0x2d30cd['command']['100'] + ('\x20(' + _0x205db6 * 0x2 + '\x20boosts),\x20invoice_id:\x20' + _0x5daa55['invoice_id'] + '.'), 'log');
-            _0x29b74b(_0xca685d, 'write', _0x2d30cd['command']['101'], 0xc8);
-            return _0x29b74b(_0xca685d, _0x3e0367, _0x2d30cd['command']['101'], 0xc8);
+        await editWebhookMessage(initialMessageId, embed);
+        if (boostCounts >= boosttttt) {
+            await sendDiscordNotification("Order Delivered, "+translations['command']['100'] + ` (${boostCounts * 2} boosts), invoice_id: ${item.invoice_id}.`, 'log');
+            handleResponse(res, mode, translations['command']['101'], 200);
+            return handleResponse(res, mode, translations['command']['101'], 200);
         } else {
-            await _0x4da502('Delivery\x20Error,\x20' + _0xdb425f * 0x2 + '\x20boosts\x20' + _0x2d30cd['command']['102'] + ',\x20invoice_id:\x20' + _0x5daa55['invoice_id'] + '.', 'log');
-            _0x29b74b(_0xca685d, 'write', _0x2d30cd['command']['103'], 0xc8);
-            return _0x29b74b(_0xca685d, _0x3e0367, _0x2d30cd['command']['103'], 0xc8);
+            await sendDiscordNotification(`Delivery Error, ${boostCountsFailed * 2} boosts ${translations['command']['102']}, invoice_id: ${item.invoice_id}.`, 'log');
+            handleResponse(res, mode, translations['command']['103'], 200);
+            return handleResponse(res, mode, translations['command']['103'], 200);
         }
-    } catch (_0x2d267a) {
-        console['error'](_0x2d267a);
-        _0x29b74b(_0xca685d, _0x3e0367, 'Erreur\x20interne\x20du\x20serveur', 0x1f4);
+    } catch (error) {
+        console.error(error);
+        handleResponse(res, mode, 'Erreur interne du serveur', 500);
     }
 };
-const _0x19f12d = (_0x10fb5f, _0x20cc1a) => {
-    if (!_0x3019c7['existsSync'](_0x5bc76d)) {
-        _0x10fb5f['writeHead'](0x194, { 'Content-Type': 'text/html' });
-        _0x10fb5f['end']('<h1>Aucune\x20commande\x20trouvée</h1>');
+
+
+
+const handleOrders = (res, queryParams) => {
+    if (!fs.existsSync(paths)) {
+        res.writeHead(404, { 'Content-Type': 'text/html' });
+        res.end('<h1>Aucune commande trouvée</h1>');
         return;
     }
-    const _0x55c378 = JSON['parse'](_0x3019c7['readFileSync'](_0x5bc76d));
-    const _0x5b369f = _0x265f61 || 0x64;
-    const _0x278372 = parseInt(_0x20cc1a) || 0x1;
-    const _0x2cf791 = _0x55c378['length'];
-    const _0x10db11 = Math['ceil'](_0x2cf791 / _0x5b369f);
-    const _0x1f5a5e = (_0x278372 - 0x1) * _0x5b369f;
-    const _0x9352fb = _0x1f5a5e + _0x5b369f;
-    const _0x24c771 = _0x55c378['slice'](_0x1f5a5e, _0x9352fb);
-    const _0x48bead = _0x55c378['filter'](_0x1d3647 => _0x1d3647['status'] === 'completed')['length'];
-    const _0x3d1ed0 = _0x55c378['reduce']((_0x59ca65, _0x349859) => {
-        const _0x4d0b65 = parseInt(_0x349859['amount'], 0xa);
-        const _0x4d2fee = _0x4d0b65 * 0xe;
-        return _0x59ca65 + _0x4d2fee;
-    }, 0x0);
-    const _0x481db0 = _0x55c378['reduce']((_0x4cf3c2, _0x2c3370) => {
-        const _0x2a5489 = parseFloat(_0x2c3370['price']);
-        return _0x4cf3c2 + (isNaN(_0x2a5489) ? 0x0 : _0x2a5489);
-    }, 0x0);
-    _0x10fb5f['writeHead'](0xc8, { 'Content-Type': 'text/html' });
-    _0x10fb5f['end']('<!DOCTYPE\x20html>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<html\x20lang=\x22fr\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<head>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<meta\x20charset=\x22UTF-8\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<meta\x20name=\x22viewport\x22\x20content=\x22width=device-width,\x20initial-scale=1.0\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<title>Dashboard\x20des\x20Commandes</title>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<style>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20*\x20{\x20box-sizing:\x20border-box;\x20margin:\x200;\x20padding:\x200;\x20font-family:\x20\x27Inter\x27,\x20sans-serif;\x20}\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20body\x20{\x20background-color:\x20#111827;\x20color:\x20#e5e7eb;\x20display:\x20flex;\x20justify-content:\x20center;\x20padding:\x2020px;\x20}\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20.dashboard\x20{\x20width:\x20100%;\x20max-width:\x201200px;\x20padding:\x2020px;\x20background:\x20#1f2937;\x20border-radius:\x2010px;\x20box-shadow:\x200\x204px\x2010px\x20rgba(0,\x200,\x200,\x200.3);\x20}\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20.logo\x20{\x20display:\x20flex;\x20align-items:\x20center;\x20justify-content:\x20center;\x20margin-bottom:\x2020px;\x20}\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20.logo\x20img\x20{\x20width:\x2080px;\x20margin-right:\x2010px;\x20}\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20.logo\x20h1\x20{\x20font-size:\x2024px;\x20font-weight:\x20bold;\x20color:\x20#60a5fa;\x20}\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20header\x20{\x20text-align:\x20center;\x20margin-bottom:\x2020px;\x20}\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20header\x20h1\x20{\x20font-size:\x201.8rem;\x20}\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20header\x20p\x20{\x20font-size:\x201.2rem;\x20opacity:\x200.8;\x20}\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20.table-container\x20{\x20overflow-x:\x20auto;\x20}\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20table\x20{\x20width:\x20100%;\x20border-collapse:\x20collapse;\x20background-color:\x20#374151;\x20border-radius:\x2010px;\x20overflow:\x20hidden;\x20}\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20th,\x20td\x20{\x20padding:\x2012px;\x20text-align:\x20left;\x20}\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20th\x20{\x20background-color:\x20#2563eb;\x20color:\x20white;\x20text-transform:\x20uppercase;\x20}\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20tr:nth-child(even)\x20{\x20background-color:\x20#1f2937;\x20}\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20tr:hover\x20{\x20background-color:\x20#334155;\x20}\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20.pagination\x20{\x20text-align:\x20center;\x20margin-top:\x2020px;\x20}\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20.pagination\x20a\x20{\x20margin:\x200\x205px;\x20padding:\x208px\x2015px;\x20background-color:\x20#2563eb;\x20color:\x20white;\x20border-radius:\x205px;\x20text-decoration:\x20none;\x20transition:\x200.3s;\x20}\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20.pagination\x20a:hover\x20{\x20background-color:\x20#1e40af;\x20}\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20footer\x20{\x20text-align:\x20center;\x20margin-top:\x2030px;\x20font-size:\x200.9rem;\x20opacity:\x200.7;\x20}\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20@media\x20(max-width:\x20768px)\x20{\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20th,\x20td\x20{\x20padding:\x2010px;\x20font-size:\x2014px;\x20}\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20.logo\x20h1\x20{\x20font-size:\x2020px;\x20}\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20header\x20h1\x20{\x20font-size:\x201.5rem;\x20}\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20header\x20p\x20{\x20font-size:\x201rem;\x20}\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20}\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</style>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</head>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<body>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22dashboard\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22logo\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<img\x20src=\x22https://media.bloumechat.com/media/PFq3HUI6Es.png\x22\x20alt=\x22Logo\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<h1>InfinityBoost</h1>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<header>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<h1>Dashboard\x20des\x20Commandes</h1>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<p>Total\x20Gagné\x20:\x20<span\x20id=\x22totalEarned\x22>' + _0x481db0['toFixed'](0x2) + '€</span>\x20|\x20Total\x20Boosts\x20:\x20<span\x20id=\x22totalBoosts\x22>' + _0x3d1ed0 + '</span>\x20|\x20Total\x20Commandes\x20:\x20<span\x20id=\x22totalCompletedOrders\x22>' + _0x48bead + '</span></p>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</header>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22table-container\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<table>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<thead>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<tr>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<th>Invoice\x20ID</th>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<th>Email</th>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<th>Prix\x20(€)</th>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<th>Status</th>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<th>Amount</th>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<th>Gateway</th>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<th>Serveur\x20ID</th>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</tr>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</thead>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<tbody>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20' + _0x24c771['map'](_0x28282b => '\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<tr>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<td>' + _0x28282b['invoice_id'] + '</td>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<td>' + _0x28282b['email'] + '</td>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<td>' + parseFloat(_0x28282b['price'])['toFixed'](0x2) + '€</td>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<td>' + _0x28282b['status'] + '</td>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<td>' + _0x28282b['amount'] + '</td>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<td>' + _0x28282b['gateway'] + '</td>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<td>' + _0x28282b['serveurID'] + '</td>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</tr>')['join']('') + '\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</tbody>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</table>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22pagination\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20' + (_0x278372 > 0x1 ? '<a\x20href=\x22/orders?page=' + (_0x278372 - 0x1) + '\x22>&laquo;\x20Précédent</a>' : '') + '\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<span>Page\x20' + _0x278372 + '\x20/\x20' + _0x10db11 + '</span>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20' + (_0x278372 < _0x10db11 ? '<a\x20href=\x22/orders?page=' + (_0x278372 + 0x1) + '\x22>Suivant\x20&raquo;</a>' : '') + '\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<footer>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<p>&copy;\x202024\x20InfinityBoost.\x20Tous\x20droits\x20réservés.</p>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</footer>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</body>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</html>\x0a');
+
+    const commandes = JSON.parse(fs.readFileSync(paths));
+    const itemsPerPage = orders_command_for_page || 100;
+    const currentPage = parseInt(queryParams) || 1; 
+    const totalOrders = commandes.length;
+    const totalPages = Math.ceil(totalOrders / itemsPerPage); 
+    const startIndex = (currentPage - 1) * itemsPerPage;
+    const endIndex = startIndex + itemsPerPage;
+    const paginatedCommandes = commandes.slice(startIndex, endIndex);
+
+    const totalCompletedOrders = commandes.filter(commande => commande.status === 'completed').length;
+    const totalBoosts = commandes.reduce((total, commande) => { 
+        const amount = parseInt(commande.amount, 10); 
+        const boostCount = amount * 14; 
+        return total + boostCount; 
+    }, 0);    
+    const totalEarned = commandes.reduce((total, commande) => {
+        const price = parseFloat(commande.price);
+        return total + (isNaN(price) ? 0 : price); 
+    }, 0);
+
+    res.writeHead(200, { 'Content-Type': 'text/html' });
+    res.end(`<!DOCTYPE html>
+            <html lang="fr">
+            <head>
+                <meta charset="UTF-8">
+                <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                <title>Dashboard des Commandes</title>
+                <style>
+                    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Inter', sans-serif; }
+                    body { background-color: #111827; color: #e5e7eb; display: flex; justify-content: center; padding: 20px; }
+                    .dashboard { width: 100%; max-width: 1200px; padding: 20px; background: #1f2937; border-radius: 10px; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); }
+                    .logo { display: flex; align-items: center; justify-content: center; margin-bottom: 20px; }
+                    .logo img { width: 80px; margin-right: 10px; }
+                    .logo h1 { font-size: 24px; font-weight: bold; color: #60a5fa; }
+                    header { text-align: center; margin-bottom: 20px; }
+                    header h1 { font-size: 1.8rem; }
+                    header p { font-size: 1.2rem; opacity: 0.8; }
+                    
+                    .table-container { overflow-x: auto; }
+                    table { width: 100%; border-collapse: collapse; background-color: #374151; border-radius: 10px; overflow: hidden; }
+                    th, td { padding: 12px; text-align: left; }
+                    th { background-color: #2563eb; color: white; text-transform: uppercase; }
+                    tr:nth-child(even) { background-color: #1f2937; }
+                    tr:hover { background-color: #334155; }
+                    
+                    .pagination { text-align: center; margin-top: 20px; }
+                    .pagination a { margin: 0 5px; padding: 8px 15px; background-color: #2563eb; color: white; border-radius: 5px; text-decoration: none; transition: 0.3s; }
+                    .pagination a:hover { background-color: #1e40af; }
+                    
+                    footer { text-align: center; margin-top: 30px; font-size: 0.9rem; opacity: 0.7; }
+                    
+                    @media (max-width: 768px) {
+                        th, td { padding: 10px; font-size: 14px; }
+                        .logo h1 { font-size: 20px; }
+                        header h1 { font-size: 1.5rem; }
+                        header p { font-size: 1rem; }
+                    }
+                </style>
+            </head>
+            <body>
+                <div class="dashboard">
+                    <div class="logo">
+                        <img src="https://media.bloumechat.com/media/PFq3HUI6Es.png" alt="Logo">
+                        <h1>InfinityBoost</h1>
+                    </div>
+                    
+                    <header>
+                        <h1>Dashboard des Commandes</h1>
+                        <p>Total Gagné : <span id="totalEarned">${totalEarned.toFixed(2)}€</span> | Total Boosts : <span id="totalBoosts">${totalBoosts}</span> | Total Commandes : <span id="totalCompletedOrders">${totalCompletedOrders}</span></p>
+                    </header>
+                    
+                    <div class="table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Invoice ID</th>
+                                    <th>Email</th>
+                                    <th>Prix (€)</th>
+                                    <th>Status</th>
+                                    <th>Amount</th>
+                                    <th>Gateway</th>
+                                    <th>Serveur ID</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                ${paginatedCommandes.map(cmd => `
+                                    <tr>
+                                        <td>${cmd.invoice_id}</td>
+                                        <td>${cmd.email}</td>
+                                        <td>${parseFloat(cmd.price).toFixed(2)}€</td>
+                                        <td>${cmd.status}</td>
+                                        <td>${cmd.amount}</td>
+                                        <td>${cmd.gateway}</td>
+                                        <td>${cmd.serveurID}</td>
+                                    </tr>`).join('')}
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                    <div class="pagination">
+                        ${currentPage > 1 ? `<a href="/orders?page=${currentPage - 1}">&laquo; Précédent</a>` : ''}
+                        <span>Page ${currentPage} / ${totalPages}</span>
+                        ${currentPage < totalPages ? `<a href="/orders?page=${currentPage + 1}">Suivant &raquo;</a>` : ''}
+                    </div>
+                    
+                    <footer>
+                        <p>&copy; 2024 InfinityBoost. Tous droits réservés.</p>
+                    </footer>
+                </div>
+            </body>
+            </html>
+`);
 };
-const _0x392140 = _0x1df006['createServer'](async (_0x28ddb6, _0x1fe24c) => {
-    console['log']('[' + new Date()['toISOString']() + ']\x20Nouvelle\x20requête\x20reçue:\x20' + _0x28ddb6['method'] + '\x20' + _0x28ddb6['url']);
-    if (_0x28ddb6['method'] === 'POST') {
-        let _0x36b1ad = '';
-        _0x28ddb6['on']('data', _0x203329 => {
-            _0x36b1ad += _0x203329['toString']();
+
+const server = http.createServer(async (req, res) => {
+    console.log(`[${new Date().toISOString()}] Nouvelle requête reçue: ${req.method} ${req.url}`);
+    
+    if (req.method === 'POST') {
+        let body = '';
+        req.on('data', chunk => {
+            body += chunk.toString();
         });
-        _0x28ddb6['on']('end', async () => {
+        
+        req.on('end', async () => {
             try {
-                const _0x52499c = JSON['parse'](_0x36b1ad);
-                const _0x659c0e = 'json';
-                const _0x14d3f3 = _0x130cbc['parse'](_0x28ddb6['url'], !![]);
-                if (_0x52499c['event'] === 'INVOICE.ITEM.DELIVER-DYNAMIC') {
-                    console['log']('[' + new Date()['toISOString']() + ']\x20Traitement\x20d\x27une\x20commande\x20INVOICE.ITEM.DELIVER-DYNAMIC');
-                    await _0x4649bc(_0x52499c, _0x659c0e, _0x1fe24c);
+                const requestData = JSON.parse(body);
+                const mode = 'json';
+                
+                const parsedUrl = url.parse(req.url, true);
+                if (requestData.event === 'INVOICE.ITEM.DELIVER-DYNAMIC') {
+                // Pour les webhooks SellAuth
+                    console.log(`[${new Date().toISOString()}] Traitement d'une commande INVOICE.ITEM.DELIVER-DYNAMIC`);
+                    await handleBooster(requestData, mode, res);
                 } else {
-                    console['log']('[' + new Date()['toISOString']() + ']\x20Event\x20non\x20supporté:', _0x52499c['event']);
-                    _0x29b74b(_0x1fe24c, _0x659c0e, 'Event\x20non\x20supporté', 0x190);
+                    console.log(`[${new Date().toISOString()}] Event non supporté:`, requestData.event);
+                    handleResponse(res, mode, 'Event non supporté', 400);
                 }
-            } catch (_0x1eb263) {
-                console['error']('[' + new Date()['toISOString']() + ']\x20Erreur\x20parsing\x20JSON:', _0x1eb263);
-                _0x29b74b(_0x1fe24c, 'json', 'Erreur\x20parsing\x20JSON', 0x190);
+            } catch (error) {
+                console.error(`[${new Date().toISOString()}] Erreur parsing JSON:`, error);
+                handleResponse(res, 'json', 'Erreur parsing JSON', 400);
             }
         });
-    } else if (_0x28ddb6['method'] === 'GET') {
+    } else if (req.method === 'GET') {
         try {
-            const _0xc2fd96 = _0x130cbc['parse'](_0x28ddb6['url'], !![]);
-            const _0x4ac31a = _0xc2fd96['query'];
-            const _0x4ba3cf = _0x4ac31a['page'] || '1';
-            console['log']('[' + new Date()['toISOString']() + ']\x20Requête\x20GET\x20reçue\x20pour\x20' + _0xc2fd96['pathname'] + ',\x20params:', _0x4ac31a);
-            if (_0xc2fd96['pathname'] === '/orders') {
-                console['log']('[' + new Date()['toISOString']() + ']\x20Traitement\x20d\x27une\x20requête\x20/orders,\x20page:', _0x4ba3cf);
-                _0x19f12d(_0x1fe24c, _0x4ba3cf);
+            const parsedUrl = url.parse(req.url, true);
+            const queryParams = parsedUrl.query;
+            const page = queryParams.page || '1';
+            console.log(`[${new Date().toISOString()}] Requête GET reçue pour ${parsedUrl.pathname}, params:`, queryParams);
+
+            if (parsedUrl.pathname === '/orders') {
+                console.log(`[${new Date().toISOString()}] Traitement d'une requête /orders, page:`, page);
+                handleOrders(res, page);
             } else {
-                console['log']('[' + new Date()['toISOString']() + ']\x20Route\x20non\x20trouvée:', _0xc2fd96['pathname']);
-                _0x29b74b(_0x1fe24c, 'json', 'Route\x20non\x20trouvée', 0x194);
+                console.log(`[${new Date().toISOString()}] Route non trouvée:`, parsedUrl.pathname);
+                handleResponse(res, 'json', 'Route non trouvée', 404);
             }
-        } catch (_0x1ff55e) {
-            console['error']('[' + new Date()['toISOString']() + ']\x20Erreur\x20lors\x20du\x20traitement\x20de\x20la\x20requête\x20GET:', _0x1ff55e);
-            _0x29b74b(_0x1fe24c, 'json', {
-                'error': 'Erreur\x20interne\x20du\x20serveur',
-                'details': _0x1ff55e['message']
-            }, 0x1f4);
+        } catch (error) {
+            console.error(`[${new Date().toISOString()}] Erreur lors du traitement de la requête GET:`, error);
+            handleResponse(res, 'json', { error: 'Erreur interne du serveur', details: error.message }, 500);
         }
     } else {
-        console['log']('[' + new Date()['toISOString']() + ']\x20Méthode\x20non\x20supportée:', _0x28ddb6['method']);
-        _0x29b74b(_0x1fe24c, 'json', 'Méthode\x20non\x20supportée', 0x195);
+        console.log(`[${new Date().toISOString()}] Méthode non supportée:`, req.method);
+        handleResponse(res, 'json', 'Méthode non supportée', 405);
     }
 });
-_0x392140['listen'](_0x27ffab, () => {
-    console['log']('[' + new Date()['toISOString']() + ']\x20Serveur\x20démarré\x20sur\x20http://' + _0x1d27bf + ':' + _0x27ffab);
+
+server.listen(portserveur, () => {
+    console.log(`[${new Date().toISOString()}] Serveur démarré sur http://${hostns}:${portserveur}`);
 });
