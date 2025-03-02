@@ -1,189 +1,190 @@
-(function (_0x19daf9, _0x142a52) {
-    const _0x58d73b = _0x38ee;
-    const _0x5d537c = _0x19daf9();
+(function (_0x508533, _0x4a5ec2) {
+    const _0x122536 = _0x2555;
+    const _0x2a42f1 = _0x508533();
     while (!![]) {
         try {
-            const _0x27d2a3 = parseInt(_0x58d73b(0x73)) / 0x1 + -parseInt(_0x58d73b(0x75)) / 0x2 + -parseInt(_0x58d73b(0x6f)) / 0x3 + parseInt(_0x58d73b(0x70)) / 0x4 + parseInt(_0x58d73b(0x72)) / 0x5 * (parseInt(_0x58d73b(0x74)) / 0x6) + parseInt(_0x58d73b(0x6e)) / 0x7 + parseInt(_0x58d73b(0x71)) / 0x8 * (-parseInt(_0x58d73b(0x76)) / 0x9);
-            if (_0x27d2a3 === _0x142a52) {
+            const _0x51ffd2 = -parseInt(_0x122536(0x90)) / 0x1 + parseInt(_0x122536(0x97)) / 0x2 * (-parseInt(_0x122536(0x95)) / 0x3) + -parseInt(_0x122536(0x91)) / 0x4 * (parseInt(_0x122536(0x92)) / 0x5) + parseInt(_0x122536(0x94)) / 0x6 + parseInt(_0x122536(0x96)) / 0x7 + parseInt(_0x122536(0x8f)) / 0x8 + -parseInt(_0x122536(0x8e)) / 0x9 * (-parseInt(_0x122536(0x93)) / 0xa);
+            if (_0x51ffd2 === _0x4a5ec2) {
                 break;
             } else {
-                _0x5d537c['push'](_0x5d537c['shift']());
+                _0x2a42f1['push'](_0x2a42f1['shift']());
             }
-        } catch (_0x200fc2) {
-            _0x5d537c['push'](_0x5d537c['shift']());
+        } catch (_0x13e377) {
+            _0x2a42f1['push'](_0x2a42f1['shift']());
         }
     }
-}(_0x376c, 0x7f8b0));
+}(_0x4753, 0x6078d));
 const {
-    Client: _0x38f7df,
-    Intents: _0x3b4d42,
-    Collection: _0x2f2e30
+    Client: _0x21ac93,
+    Intents: _0x117def,
+    Collection: _0x58e30b
 } = require('discord.js');
-const _0x1a0d8e = require('fs');
-function _0x376c() {
-    const _0x29351c = [
-        '246806AiCHpe',
-        '9dBQsiw',
-        '1436540RYTkbh',
-        '2742861XVbmjF',
-        '1208408pxqbRP',
-        '4784056HgUVjR',
-        '40UeLyDD',
-        '1013079rUtztM',
-        '478284TNfxDI'
+const _0x365b0f = require('fs');
+const _0x2b6fe5 = require('path');
+const {REST: _0x210a54} = require('@discordjs/rest');
+const {Routes: _0x1a72d0} = require('discord-api-types/v9');
+const _0x20ea7b = require('axios');
+const {performOperation: _0x507a7d} = require('./required/performOp');
+const _0x45e8b7 = require('./config.json');
+const _0x56de8d = require('gradient-string');
+const _0x3b5ce0 = require('figlet');
+let _0x28e146 = _0x45e8b7['service']['name_shop'];
+let _0x1420a1 = _0x45e8b7['apikey'];
+function _0x4753() {
+    const _0x53c9c8 = [
+        '4vilsti',
+        '2516245DPIMPS',
+        '10NPAbVv',
+        '4170624NsZSVU',
+        '261ONqIdo',
+        '229495RYVSKH',
+        '4NofEpY',
+        '1888479MDWLvA',
+        '2472920uTArya',
+        '348263iFPkqp'
     ];
-    _0x376c = function () {
-        return _0x29351c;
+    _0x4753 = function () {
+        return _0x53c9c8;
     };
-    return _0x376c();
+    return _0x4753();
 }
-const _0x278b13 = require('path');
-function _0x38ee(_0x3d28c7, _0x1f3b63) {
-    const _0x376c05 = _0x376c();
-    _0x38ee = function (_0x38ee8a, _0x478f7a) {
-        _0x38ee8a = _0x38ee8a - 0x6e;
-        let _0x19956f = _0x376c05[_0x38ee8a];
-        return _0x19956f;
+let _0x234621 = _0x45e8b7['bot']['status'];
+let _0xa54f6d = _0x45e8b7['service']['banner'];
+let _0x4ca1e7 = _0x45e8b7['bot']['discord_webhook_url_command_log'];
+function _0x2555(_0x46f749, _0xa6c2ba) {
+    const _0x475381 = _0x4753();
+    _0x2555 = function (_0x2555b5, _0x3937f9) {
+        _0x2555b5 = _0x2555b5 - 0x8e;
+        let _0x588f93 = _0x475381[_0x2555b5];
+        return _0x588f93;
     };
-    return _0x38ee(_0x3d28c7, _0x1f3b63);
+    return _0x2555(_0x46f749, _0xa6c2ba);
 }
-const {REST: _0xdb1692} = require('@discordjs/rest');
-const {Routes: _0x1e11c1} = require('discord-api-types/v9');
-const _0x152f46 = require('axios');
-const {performOperation: _0x5c2048} = require('./required/performOp');
-const _0x447958 = require('./config.json');
-const _0x1486be = require('gradient-string');
-const _0x1265d2 = require('figlet');
-let _0x440532 = _0x447958['service']['name_shop'];
-let _0xd241a4 = _0x447958['apikey'];
-let _0x45cd1a = _0x447958['service']['banner'];
-let _0x310ecf = _0x447958['bot']['discord_webhook_url_command_log'];
-const _0x495b26 = JSON['parse'](_0x1a0d8e['readFileSync']('./api-translate/langs.json', 'utf-8'));
-const _0x48efd7 = _0x447958['service']['langue_shop'];
-const _0x4a5605 = _0x495b26[_0x48efd7];
-let _0x175ac0;
-process['on']('uncaughtException', _0x3d0ecd => {
-    console['log']('Erreur\x20non\x20gérée\x20:', _0x3d0ecd);
+const _0x5e783b = JSON['parse'](_0x365b0f['readFileSync']('./api-translate/langs.json', 'utf-8'));
+const _0x51beb0 = _0x45e8b7['service']['langue_shop'];
+const _0x35802c = _0x5e783b[_0x51beb0];
+let _0x1088ca;
+process['on']('uncaughtException', _0x2af1ed => {
+    console['log']('Erreur\x20non\x20gérée\x20:', _0x2af1ed);
     console['log']('Le\x20bot\x20continue\x20de\x20tourner\x20malgré\x20l\x27erreur.');
 });
-process['on']('unhandledRejection', (_0x3b67e5, _0x5c713b) => {
+process['on']('unhandledRejection', (_0x20e7c3, _0x4a583c) => {
     console['log']('Le\x20bot\x20continue\x20de\x20tourner\x20malgré\x20l\x27erreur.');
-    console['log'](_0x3b67e5);
+    console['log'](_0x20e7c3);
 });
-async function _0x162fd2() {
-    return new Promise((_0x3ff9a0, _0x5079b1) => {
-        _0x5c2048((_0x49317d, _0x50e671) => {
-            if (_0x49317d) {
+async function _0x496a2a() {
+    return new Promise((_0x5b62d1, _0x191cfa) => {
+        _0x507a7d((_0x382f9d, _0x115a7d) => {
+            if (_0x382f9d) {
                 console['log']('Erreur\x20lors\x20de\x20l\x27exécution\x20du\x20code,\x20code\x20erreur\x20:\x20500,\x20Veuillez\x20contacter\x20le\x20support.');
-                _0x5079b1(_0x49317d);
+                _0x191cfa(_0x382f9d);
             } else {
-                _0x175ac0 = _0x50e671;
-                _0x3ff9a0(_0x175ac0);
+                _0x1088ca = _0x115a7d;
+                _0x5b62d1(_0x1088ca);
             }
         });
     });
 }
 ((async () => {
     console['clear']();
-    const _0x1f89cd = 'InfinityBoost\x20Bot\x20V4';
-    await _0x162fd2();
-    _0x1265d2(_0x1f89cd, function (_0x563a21, _0x6894dc) {
-        console['log'](_0x1486be['rainbow'](_0x6894dc));
-        console['log'](_0x1486be['rainbow']('♾️\x20-\x20InfinityBoost\x20Bot\x20V4\x20par\x20') + 'MrX');
-        console['log'](_0x1486be['rainbow']('♾️\x20-\x20InfinityBoost\x20Bot\x20V4\x20Version\x20') + 'V4.0');
+    const _0x5ce43c = 'InfinityBoost\x20Bot\x20V4';
+    await _0x496a2a();
+    _0x3b5ce0(_0x5ce43c, function (_0x5b903e, _0x337c26) {
+        console['log'](_0x56de8d['rainbow'](_0x337c26));
+        console['log'](_0x56de8d['rainbow']('♾️\x20-\x20InfinityBoost\x20Bot\x20V4\x20par\x20') + 'MrX');
+        console['log'](_0x56de8d['rainbow']('♾️\x20-\x20InfinityBoost\x20Bot\x20V4\x20Version\x20') + 'V4.0');
     });
-    const _0x5f1c4c = await _0x152f46['post']('https://panel.infinityboost.monster/api/v4/api?apikey=' + _0xd241a4 + '&machineid=' + _0x175ac0 + '&shopname=' + _0x440532 + '&mode=PERFORMOP', {}, { 'timeout': 0xf4240 });
-    if (_0x5f1c4c['data']['success'] === ![]) {
-        console['log'](_0x1486be['retro']('⛔\x20-\x20Invalid\x20license\x20key\x20or\x20HWID\x20doesn\x27t\x20match.\x20Ask\x20for\x20a\x20HWID\x20reset'));
+    const _0x51d5b9 = await _0x20ea7b['post']('https://panel.infinityboost.monster/api/v4/api?apikey=' + _0x1420a1 + '&machineid=' + _0x1088ca + '&shopname=' + _0x28e146 + '&mode=PERFORMOP', {}, { 'timeout': 0xf4240 });
+    if (_0x51d5b9['data']['success'] === ![]) {
+        console['log'](_0x56de8d['retro']('⛔\x20-\x20Invalid\x20license\x20key\x20or\x20HWID\x20doesn\x27t\x20match.\x20Ask\x20for\x20a\x20HWID\x20reset'));
         process['exit'](0x1);
     } else {
-        console['log'](_0x1486be['retro']('✅\x20-\x20Licence\x20valide,\x20démarrage\x20du\x20code...'));
+        console['log'](_0x56de8d['retro']('✅\x20-\x20Licence\x20valide,\x20démarrage\x20du\x20code...'));
     }
-    await new Promise(_0x3f0231 => setTimeout(_0x3f0231, 0x5dc));
-    let _0x1e6ba1 = _0x447958['bot']['guildid'];
-    let _0x290fd7 = _0x447958['bot']['clientid'];
-    const _0x2c3c29 = [];
-    const _0x4a48ef = _0x1a0d8e['readdirSync']('commands')['filter'](_0x3fc69a => _0x3fc69a['endsWith']('.js'));
-    for (const _0x4405f7 of _0x4a48ef) {
-        const _0x414500 = require(_0x278b13['join'](__dirname, 'commands', _0x4405f7));
-        _0x2c3c29['push'](_0x414500['data']);
+    await new Promise(_0x1bbead => setTimeout(_0x1bbead, 0x5dc));
+    let _0x2b964e = _0x45e8b7['bot']['guildid'];
+    let _0x5dedec = _0x45e8b7['bot']['clientid'];
+    const _0x5c7779 = [];
+    const _0x290e5e = _0x365b0f['readdirSync']('commands')['filter'](_0x5be925 => _0x5be925['endsWith']('.js'));
+    for (const _0xffe135 of _0x290e5e) {
+        const _0x57a6bd = require(_0x2b6fe5['join'](__dirname, 'commands', _0xffe135));
+        _0x5c7779['push'](_0x57a6bd['data']);
     }
-    const _0x45b94c = new _0xdb1692({ 'version': '9' })['setToken'](_0x447958['bot']['token']);
+    const _0x3fff6f = new _0x210a54({ 'version': '9' })['setToken'](_0x45e8b7['bot']['token']);
     try {
-        await _0x45b94c['put'](_0x1e11c1['applicationGuildCommands'](_0x290fd7, _0x1e6ba1), { 'body': _0x2c3c29 });
-        console['log']('✅\x20-\x20Le\x20clientId:', _0x290fd7);
-        console['log']('✅\x20-\x20guildId:', _0x1e6ba1);
-        console['log']('✅\x20-\x20' + _0x4a5605['command']['95']);
-    } catch (_0x35a03c) {
-        console['error'](_0x35a03c);
+        await _0x3fff6f['put'](_0x1a72d0['applicationGuildCommands'](_0x5dedec, _0x2b964e), { 'body': _0x5c7779 });
+        console['log']('✅\x20-\x20Le\x20clientId:', _0x5dedec);
+        console['log']('✅\x20-\x20guildId:', _0x2b964e);
+        console['log']('✅\x20-\x20' + _0x35802c['command']['95']);
+    } catch (_0x541f4d) {
+        console['error'](_0x541f4d);
     }
-    await new Promise(_0x18be18 => setTimeout(_0x18be18, 0x3e8));
-    const _0x20a872 = new _0x38f7df({
+    await new Promise(_0x560ffc => setTimeout(_0x560ffc, 0x3e8));
+    const _0x2f1afd = new _0x21ac93({
         'intents': [
-            _0x3b4d42['FLAGS']['GUILDS'],
-            _0x3b4d42['FLAGS']['GUILD_MESSAGES'],
+            _0x117def['FLAGS']['GUILDS'],
+            _0x117def['FLAGS']['GUILD_MESSAGES'],
             ,
-            _0x3b4d42['FLAGS']['GUILD_MEMBERS'],
-            _0x3b4d42['FLAGS']['GUILD_PRESENCES']
+            _0x117def['FLAGS']['GUILD_MEMBERS'],
+            _0x117def['FLAGS']['GUILD_PRESENCES']
         ]
     });
-    _0x20a872['commands'] = new _0x2f2e30();
-    const _0x3d2dc4 = _0x1a0d8e['readdirSync']('commands')['filter'](_0x34bb6b => _0x34bb6b['endsWith']('.js'));
-    for (const _0x553fc1 of _0x3d2dc4) {
-        const _0x30c851 = require('./commands/' + _0x553fc1);
-        _0x20a872['commands']['set'](_0x30c851['data']['name'], _0x30c851);
-        console['log']('✅\x20-\x20' + _0x4a5605['command']['93'] + ('\x20' + _0x30c851['data']['name'] + '\x20') + _0x4a5605['command']['94']);
+    _0x2f1afd['commands'] = new _0x58e30b();
+    const _0x5cea74 = _0x365b0f['readdirSync']('commands')['filter'](_0x48338a => _0x48338a['endsWith']('.js'));
+    for (const _0x2271c4 of _0x5cea74) {
+        const _0x2f6678 = require('./commands/' + _0x2271c4);
+        _0x2f1afd['commands']['set'](_0x2f6678['data']['name'], _0x2f6678);
+        console['log']('✅\x20-\x20' + _0x35802c['command']['93'] + ('\x20' + _0x2f6678['data']['name'] + '\x20') + _0x35802c['command']['94']);
     }
     require('./autobuy/index');
-    _0x20a872['on']('ready', () => {
-        console['log']('✅\x20-\x20' + _0x4a5605['command']['91'] + (_0x20a872['user']['tag'] + '\x20') + _0x4a5605['command']['92']);
-        var _0x2aac51 = ['Bot\x20Boost\x20V4\x20by\x20MrX\x20-\x20bloumechat.com'];
-        var _0x59f968 = ['online'];
-        var _0xefa966 = ['PLAYING'];
-        _0x20a872['user']['setPresence']({
+    _0x2f1afd['on']('ready', () => {
+        console['log']('✅\x20-\x20' + _0x35802c['command']['91'] + (_0x2f1afd['user']['tag'] + '\x20') + _0x35802c['command']['92']);
+        var _0x10d62d = ['online'];
+        var _0x453124 = ['PLAYING'];
+        _0x2f1afd['user']['setPresence']({
             'activities': [{
-                    'name': _0x2aac51[Math['floor'](Math['random']() * _0x2aac51['length'])],
-                    'type': _0xefa966[Math['floor'](Math['random']() * _0xefa966['length'])]
+                    'name': _0x234621,
+                    'type': _0x453124
                 }],
-            'status': _0x59f968[Math['floor'](Math['random']() * _0x59f968['length'])]
+            'status': _0x10d62d
         });
     });
-    _0x20a872['on']('interactionCreate', async _0x45a2ec => {
-        let _0x46d431 = _0x45a2ec['user']['id'];
-        if (!_0x45a2ec['isCommand']())
+    _0x2f1afd['on']('interactionCreate', async _0x5d0bbc => {
+        let _0x6c10c7 = _0x5d0bbc['user']['id'];
+        if (!_0x5d0bbc['isCommand']())
             return;
-        const _0x45d5e0 = _0x20a872['commands']['get'](_0x45a2ec['commandName']);
-        if (!_0x45d5e0)
+        const _0x58f83d = _0x2f1afd['commands']['get'](_0x5d0bbc['commandName']);
+        if (!_0x58f83d)
             return;
         try {
-            const _0x30896a = Date['now']();
-            await _0x45d5e0['execute'](_0x45a2ec, _0x20a872);
-            const _0x5260de = Date['now']();
-            const _0x134a40 = _0x5260de - _0x30896a;
-            const _0x1cd770 = {
+            const _0x27f132 = Date['now']();
+            await _0x58f83d['execute'](_0x5d0bbc, _0x2f1afd);
+            const _0x588c89 = Date['now']();
+            const _0x228ef1 = _0x588c89 - _0x27f132;
+            const _0x2ed366 = {
                 'color': 0x99ff,
-                'title': _0x440532 + '\x20-\x20' + _0x4a5605['command']['86'],
-                'description': _0x4a5605['command']['88'] + ('\x20**/' + _0x45a2ec['commandName'] + '**\x20') + _0x4a5605['command']['89'] + ('\x20<@' + _0x46d431 + '>.'),
+                'title': _0x28e146 + '\x20-\x20' + _0x35802c['command']['86'],
+                'description': _0x35802c['command']['88'] + ('\x20**/' + _0x5d0bbc['commandName'] + '**\x20') + _0x35802c['command']['89'] + ('\x20<@' + _0x6c10c7 + '>.'),
                 'fields': [
                     {
-                        'name': _0x4a5605['command']['90'],
+                        'name': _0x35802c['command']['90'],
                         'value': '<t:' + Math['floor'](Date['now']() / 0x3e8) + ':F>',
                         'inline': !![]
                     },
                     {
-                        'name': _0x4a5605['command']['87'],
-                        'value': (_0x134a40 / 0x3e8)['toFixed'](0x2) + '\x20secondes',
+                        'name': _0x35802c['command']['87'],
+                        'value': (_0x228ef1 / 0x3e8)['toFixed'](0x2) + '\x20secondes',
                         'inline': !![]
                     }
                 ],
-                'image': { 'url': _0x45cd1a },
+                'image': { 'url': _0xa54f6d },
                 'timestamp': new Date(),
-                'footer': { 'text': _0x4a5605['command']['85'] + '\x20-\x20' + _0x4a5605['command']['7'] + '\x20MrX' }
+                'footer': { 'text': _0x35802c['command']['85'] + '\x20-\x20' + _0x35802c['command']['7'] + '\x20MrX' }
             };
-            await _0x152f46['post'](_0x310ecf, { 'embeds': [_0x1cd770] });
-        } catch (_0x50676a) {
-            console['log'](_0x50676a);
+            await _0x20ea7b['post'](_0x4ca1e7, { 'embeds': [_0x2ed366] });
+        } catch (_0x1d5f95) {
+            console['log'](_0x1d5f95);
         }
     });
-    _0x20a872['login'](_0x447958['bot']['token']);
+    _0x2f1afd['login'](_0x45e8b7['bot']['token']);
 })());
