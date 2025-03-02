@@ -22,7 +22,7 @@ The `config.json` file contains all the necessary configuration settings for the
 1. Get `apikey_sellauth` and `shop_id_sellauth` from [SellAuth API Dashboard](https://dash.sellauth.com/api).
 2. Create a webhook for `discord_webhook_url_command_log` to log new orders.
 3. Create a webhook for `discord_webhook_url_console` to log the console.
-4. If you are using Pterodactyl, enter the address as in the screenshot, otherwise enter `host` as your domain or IP and `port` as the port you have configured.
+4. If you are using Pterodactyl, enter the address as in the tutorial video, otherwise enter `host` as your domain or IP and `port` as the port you have configured.
 5. The `port` is either the port used by your pterodactyl server or the port you want to use.
 6. Create a product on SellAuth:
 - In the shipping options, select "dynamic".
@@ -89,7 +89,7 @@ Le fichier `config.json` contient tous les paramètres de configuration nécessa
 1. Obtenez `apikey_sellauth` et `shop_id_sellauth` sur [SellAuth API Dashboard](https://dash.sellauth.com/api).
 2. Créez un webhook pour `discord_webhook_url_command_log` afin de journaliser les nouvelles commandes.
 3. Créez un webhook pour `discord_webhook_url_console` afin de journaliser la console.
-4. Si vous utilisez Pterodactyl, indiquez l'adresse comme sur la capture d'écran sinon indiquez `host` comme votre domaine ou IP et `port` comme le port que vous avez configurées.
+4. Si vous utilisez Pterodactyl, indiquez l'adresse comme sur le tuto youtube sinon indiquez `host` comme votre domaine ou IP et `port` comme le port que vous avez configurées.
 5. Le `port` c'est soit le port utilisée par votre serveur pterodactyl ou le port que vous voulez utilisée .
 6. Créez un produit sur SellAuth :
   - Dans les options de livraison, sélectionnez "dynamic".
