@@ -24,7 +24,8 @@ The `config.json` file contains all the necessary configuration settings for the
 3. Create a webhook for `discord_webhook_url_console` to log the console.
 4. If you are using Pterodactyl, enter the address as in the tutorial video, otherwise enter `host` as your domain or IP and `port` as the port you have configured.
 5. The `port` is either the port used by your pterodactyl server or the port you want to use.
-6. Create a product on SellAuth:
+6. the `check_bot` is the number of times the bot will check if the bot is in the server to boost and `time_check_bot` (minutes example 15 equals 15 minutes) is the time between the number of times it will check example every 15 minutes it will check 15 times maximum.
+7. Create a product on SellAuth:
 - In the shipping options, select "dynamic".
 - Add your server URL (IP or host) followed by the port.
 - Product name: [Number of boosts per order] 1/3 month boost (example below).
@@ -94,7 +95,8 @@ Le fichier `config.json` contient tous les paramètres de configuration nécessa
 3. Créez un webhook pour `discord_webhook_url_console` afin de journaliser la console.
 4. Si vous utilisez Pterodactyl, indiquez l'adresse comme sur le tuto youtube sinon indiquez `host` comme votre domaine ou IP et `port` comme le port que vous avez configurées.
 5. Le `port` c'est soit le port utilisée par votre serveur pterodactyl ou le port que vous voulez utilisée .
-6. Créez un produit sur SellAuth :
+6. Le `check_bot` ses le nombre de fois que le bot vas verifier si le bot et dans le serveur a booster et `time_check_bot` (minutes exemple 15 égale a 15 minutes) ses le temps entre le nombre de fois il va verifier exemple toute les 15 minutes il vas verifier 15 fois au maximum.
+7. Créez un produit sur SellAuth :
   - Dans les options de livraison, sélectionnez "dynamic".
   - Ajoutez l'URL de votre serveur (IP ou hôte) suivi du port.
   - Nom du produit : [Nombre de boosts par commande] boost 1/3 mois (exemple ci-dessous).
