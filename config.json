@@ -2,6 +2,7 @@
   "maintenance": "false",
   "apikey": "",
   "bot": {
+    "status": "Bot Boost V4 by MrX - bloumechat.com",
     "token": "",
     "guildid": "",
     "clientid": "",
@@ -14,7 +15,9 @@
     "banner": ""
   },
   "autobuy": {
+    "autobuy_enabled": false,
     "bio": ".gg/infinityboost - https://bloumechat.com",
+    "check_bot": 15,
     "apikey_sellauth": "",
     "shop_id_sellauth": "",
     "discord_webhook_url_command_log": "",
