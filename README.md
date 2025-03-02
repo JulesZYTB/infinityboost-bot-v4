@@ -32,7 +32,10 @@ The `config.json` file contains all the necessary configuration settings for the
 
 ```json
 "autobuy": {
+    "autobuy_enabled": true,
     "bio": ".gg/infinityboost - https://bloumechat.com",
+    "check_bot": 15,
+    "time_check_bot": 15,
     "apikey_sellauth": "",
     "shop_id_sellauth": "",
     "discord_webhook_url_command_log": "",
