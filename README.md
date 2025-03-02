@@ -95,7 +95,7 @@ Le fichier `config.json` contient tous les paramètres de configuration nécessa
 3. Créez un webhook pour `discord_webhook_url_console` afin de journaliser la console.
 4. Si vous utilisez Pterodactyl, indiquez l'adresse comme sur le tuto youtube sinon indiquez `host` comme votre domaine ou IP et `port` comme le port que vous avez configurées.
 5. Le `port` c'est soit le port utilisée par votre serveur pterodactyl ou le port que vous voulez utilisée .
-6. Le `check_bot` ses le nombre de fois que le bot vas verifier si le bot et dans le serveur a booster et `time_check_bot` (minutes exemple 15 égale a 15 minutes) ses le temps entre le nombre de fois il va verifier exemple toute les 15 minutes il vas verifier 15 fois au maximum.
+6. Le `check_bot` ses le nombre de fois que le bot vas verifier si le bot est dans le serveur a booster et `time_check_bot` (minutes exemple 15 égale a 15 minutes) ses le temps entre le nombre de fois il va verifier exemple toute les 15 minutes il vas verifier 15 fois au maximum.
 7. Créez un produit sur SellAuth :
   - Dans les options de livraison, sélectionnez "dynamic".
   - Ajoutez l'URL de votre serveur (IP ou hôte) suivi du port.
