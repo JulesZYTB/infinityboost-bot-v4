@@ -12,7 +12,7 @@
             "9": "Erreur only API",
             "10": "Crée un lien avec les token de votre stock de boost",
             "11": "Nombre de tokens à envoyer",
-            "12": "Puisque tu n'a pas les permissions, tu ne peux pas utiliser cette commande.",
+            "12": "Puisque tu n'es pas l'utilisateur qui possède cette API, tu ne peux pas utiliser cette commande.",
             "13": "n'a plus de stock. Merci de patienter !",
             "14": "Tokens récupérés avec succès !",
             "15": "Nombre de tokens envoyés",
@@ -115,7 +115,10 @@
             "115": "Quel ID modifier ? (id_1, id_2, id_3)",
             "116": "modifier",
             "117": "ajouté à",
-            "118": "Voici le fichier des résultats avec seulement les tokens : "
+            "118": "Voici le fichier des résultats avec seulement les tokens : ",
+            "119": "Nom du produit ou type de token mal configuré, [] manquants ou autre.",
+            "120": "Tous les tokens ont été livrés",
+            "121": "Voir le stock en direct ce rafraichit toutes les 1 minutes."
         }
     },
     "en": {
@@ -131,7 +134,7 @@
             "9": "Error only API",
             "10": "Create a link with the tokens from your boost stock",
             "11": "Number of tokens to send",
-            "12": "Since you don't have permissions, you can't use this command.",
+            "12": "Since you are not the user who owns this API, you cannot use this command.",
             "13": "is out of stock. Please wait!",
             "14": "Tokens retrieved successfully!",
             "15": "Number of tokens sent",
@@ -234,7 +237,10 @@
             "115": "Which ID to edit? (id_1, id_2, id_3)",
             "116": "edit",
             "117": "added to",
-            "118": "Here is the results file with only the tokens:"
+            "118": "Here is the results file with only the tokens:",
+            "119": "Product name or token type incorrectly configured, missing [] or other issue.",
+            "120": "All tokens have been delivered",
+            "121": "View live stock refreshes every 1 minute."
         }
     }
 }
