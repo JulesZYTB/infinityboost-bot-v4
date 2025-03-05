@@ -26,7 +26,7 @@ The `config.json` file contains all the necessary configuration settings for the
 5. The `port` is either the port used by your pterodactyl server or the port you want to use.
 6. the `check_bot` is the number of times the bot will check if the bot is in the server to boost and `time_check_bot` (minutes example 15 equals 15 minutes) is the time between the number of times it will check example every 15 minutes it will check 15 times maximum.
 7. Create a product on SellAuth:
-- In the shipping options, select "dynamic" : added the url http://`host:port`/send or /booster
+- In the shipping options, select "dynamic" : added the url `http://host:port`**/send** (send token) or **/booster** (Server boost)
 - Add your server URL (IP or host) followed by the port.
 - Product name: [Number of boosts per order] 1/3 month boost (example below).
 - [https://www.youtube.com/watch?v=Hc79sDi3f0U](https://youtu.be/6MxxndGTObY)
@@ -97,7 +97,7 @@ Le fichier `config.json` contient tous les paramètres de configuration nécessa
 5. Le `port` c'est soit le port utilisée par votre serveur pterodactyl ou le port que vous voulez utilisée .
 6. Le `check_bot` ses le nombre de fois que le bot vas verifier si le bot est dans le serveur a booster et `time_check_bot` (minutes exemple 15 égale a 15 minutes) ses le temps entre le nombre de fois il va verifier exemple toute les 15 minutes il vas verifier 15 fois au maximum.
 7. Créez un produit sur SellAuth :
-  - Dans les options de livraison, sélectionnez "dynamic" : ajoutée l'url http://`host:port`/send or /booster
+  - Dans les options de livraison, sélectionnez "dynamic" : ajoutée l'url `http://host:port`**/send** (send token) ou **/booster** (Boost serveur)
   - Ajoutez l'URL de votre serveur (IP ou hôte) suivi du port.
   - Nom du produit : [Nombre de boosts par commande] boost 1/3 mois (exemple ci-dessous).
   - [https://www.youtube.com/watch?v=Hc79sDi3f0U](https://youtu.be/6MxxndGTObY)
