@@ -29,6 +29,8 @@ The `config.json` file contains all the necessary configuration settings for the
 - In the shipping options, select "dynamic" : added the url `http://host:port`**/send** (send token) or **/booster** (Server boost)
 - Add your server URL (IP or host) followed by the port.
 - Product name: [Number of boosts per order] 1/3 month boost (example below).
+- For /booster example: [14] boost 1 Month, [6] boost 1 Month, [14] boost 3 Month, [6] boost 3 Month...
+- For /send example: Nitro token 1 Month, Nitro token 3 Month, Nitro Boost 1 Month, Nitro Boost 1 year, Nitro Basic 1 Month, Nitro Basic 1 year...
 - [https://www.youtube.com/watch?v=Hc79sDi3f0U](https://youtu.be/6MxxndGTObY)
 
 ```json
@@ -56,7 +58,8 @@ To run the bot, use one of the following commands:
 
 You can use various commands to interact with the bot, including:
 - `/boost` - Boost your Discord server.
-- `/stock` - Check stock token and boost.
+- `/stock` - Check stock token and boost or Nitro.
+- `/live-stock` - Check stock token and boost.
 - `/stats` - Get trading statistics.
 - `/send` - Create a link with the tokens from your stock.
 - `/restock` - Restock tokens.
@@ -100,6 +103,8 @@ Le fichier `config.json` contient tous les paramètres de configuration nécessa
   - Dans les options de livraison, sélectionnez "dynamic" : ajoutée l'url `http://host:port`**/send** (send token) ou **/booster** (Boost serveur)
   - Ajoutez l'URL de votre serveur (IP ou hôte) suivi du port.
   - Nom du produit : [Nombre de boosts par commande] boost 1/3 mois (exemple ci-dessous).
+  - Pour /booster exemple : [14] boost 1 Mois, [6] boost 1 Mois, [14] boost 3 Mois, [6] boost 3 Mois...
+  - Pour /send exemple : Nitro token 1 Mois, Nitro token 3 Mois, Nitro Boost 1 Mois, Nitro Boost 1 ans, Nitro Basic 1 Mois, Nitro Basic 1 ans...
   - [https://www.youtube.com/watch?v=Hc79sDi3f0U](https://youtu.be/6MxxndGTObY)
 
 ```json
@@ -127,7 +132,8 @@ Pour exécuter le bot, utilisez l'une des commandes suivantes :
 
 Vous pouvez utiliser différentes commandes pour interagir avec le bot, notamment :
 - `/boost` - Booster votre serveur Discord.
-- `/stock` - Vérifier le stock de tokens et de boosts.
+- `/stock` - Vérifier le stock de tokens et de boosts ou de nitro.
+- `/live-stock` - Vérifier le stock de tokens et de boosts.
 - `/stats` - Obtenir des statistiques de trading.
 - `/send` - Créer un lien avec les tokens de votre stock.
 - `/restock` - Réapprovisionner les tokens.
